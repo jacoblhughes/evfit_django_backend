@@ -31,12 +31,11 @@
 </head>
 
 <body>
+    <div class='container navbar_container'>
 
-    <nav class='navbar mynav' role='navigation' id='navbar'>
-        <div class='container'>
-            <a class='navbar-brand mynav' href="{% url 'home' %}">Evident Fitness Portal</a>
-
-            <ul class='nav navbar-nav navbar-right'>
+        <nav class='navbar navbar-expand-lg navbar-light' role='navigation' id='navbar'>
+                <a class='navbar-brand mynav' href="{% url 'home' %}"><img id='ef_logo' src="{% static 'efportal/images/ef_logo.jpg' %}" /></a>         
+                <ul class='nav navbar-nav navbar-right'>
                 {% if user.is_authenticated %}
                 {% comment %} <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
                 {% endcomment %}
@@ -44,16 +43,17 @@
                 {% endcomment %}
                 {% comment %} <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
                 {% endcomment %}
-                <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
+                <li class = 'nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:logout' %}">Log out</a></li>
                 {% else %}
                 {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
                 {% endcomment %}
-                <li><a href="{% url 'accounts:login' %}" class="btn btn-simple">Log in</a></li>
-                <li><a href="{% url 'accounts:signup' %}" class="btn btn-simple">Sign up</a></li>
+                <li class = 'nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:login' %}">Log in</a></li>
+                <li class = 'nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:signup' %}">Sign up</a></li>
                 {% endif %}
-            </ul>
-        </div>
-    </nav>
+                </ul>
+        </nav>
+    </div>
+
 
     <div class='container mycontent'>
 
