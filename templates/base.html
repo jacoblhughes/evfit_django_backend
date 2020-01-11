@@ -1,60 +1,68 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Star Social</title>
-
+    <title>EF PORTAL</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'efportal/css/efportalstyle.css' %}" />
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
-    <link rel='stylesheet' type = 'text/css' href = "{% static 'efportal/css/master.css' %}">
+    {% comment %}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> {% endcomment %}
+
+
 
 </head>
+
 <body>
 
-    <nav class = 'navbar mynav' role = 'navigation' id='navbar'>
-        <div class = 'container'>
-            <a class = 'navbar-brand mynav' href = "{% url 'home' %}">Star Social</a>
+    <nav class='navbar mynav' role='navigation' id='navbar'>
+        <div class='container'>
+            <a class='navbar-brand mynav' href="{% url 'home' %}">Evident Fitness Portal</a>
 
-            <ul class = 'nav navbar-nav navbar-right'>
+            <ul class='nav navbar-nav navbar-right'>
                 {% if user.is_authenticated %}
-                    {% comment %} <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li> {% endcomment %}
-                    {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li> {% endcomment %}
-                    {% comment %} <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li> {% endcomment %}
-                    <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
+                {% comment %} <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
+                {% endcomment %}
+                {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
+                {% endcomment %}
+                {% comment %} <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
+                {% endcomment %}
+                <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
                 {% else %}
-                    {% comment %} <li><a href="{% url 'groups:all' %}"class="btn btn-simple">Groups</a></li> {% endcomment %}
-                    <li><a href="{% url 'accounts:login' %}" class="btn btn-simple">Log in</a></li>
-                    <li><a href="{% url 'accounts:signup' %}" class="btn btn-simple">Sign up</a></li>
+                {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
+                {% endcomment %}
+                <li><a href="{% url 'accounts:login' %}" class="btn btn-simple">Log in</a></li>
+                <li><a href="{% url 'accounts:signup' %}" class="btn btn-simple">Sign up</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
-    <div class = 'container mycontent'>
+    <div class='container mycontent'>
 
-    {% block content %}
+        {% block content %}
 
 
-    {% endblock %}
+        {% endblock %}
 
     </div>
 </body>
 
-{% comment %} <script type = 'text/javascript' src = "{% static 'simplesocial/js/master.js' %}">
-</script> {% endcomment %}
 </html>
