@@ -6,51 +6,56 @@
 <head>
     <meta charset="UTF-8">
     <title>EF PORTAL</title>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'efportal/css/efportalstyle.css' %}" />
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
-
-
-    {% comment %}
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'efportal/css/efportalstyle.css' %}" />
 
 
 
 </head>
 
 <body>
-    <div class='container navbar_container'>
+    <div class='container-fluid' id='navbar_container'>
 
         <nav class='navbar navbar-expand-lg navbar-light' role='navigation' id='navbar'>
-                <a class='navbar-brand mynav' href="{% url 'home' %}"><img id='ef_logo' src="{% static 'efportal/images/ef_logo.JPG' alt = 'EF Logo' %}" /></a>         
-                <ul class='nav navbar-nav navbar-right'>
-                {% if user.is_authenticated %}
-                {% comment %} <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
-                {% endcomment %}
-                {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                {% endcomment %}
-                {% comment %} <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
-                {% endcomment %}
-                <li class = 'nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:logout' %}">Log out</a></li>
-                {% else %}
-                {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                {% endcomment %}
-                <li class = 'nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:login' %}">Log in</a></li>
-                <li class = 'nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:signup' %}">Sign up</a></li>
-                {% endif %}
+            <a class='navbar-brand mynav' href="{% url 'home' %}"><img id='ef_logo'
+                    src="{% static 'efportal/images/ef_logo.JPG'%}" alt='EF Logo' /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseNavbar"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class='collapse navbar-collapse' id='collapseNavbar'>
+                <ul class='nav navbar-nav ml-auto'>
+                    {% if user.is_authenticated %}
+                    {% comment %} <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
+                    {% endcomment %}
+                    {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
+                    {% endcomment %}
+                    {% comment %} <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
+                    {% endcomment %}
+                    <li class='nav-item active'><a class="nav-link btn btn-simple"
+                            href="{% url 'accounts:logout' %}">Log
+                            out</a></li>
+                    {% else %}
+                    {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
+                    {% endcomment %}
+                    <li class='nav-item active'><a class="nav-link btn btn-simple" href="{% url 'accounts:login' %}">Log
+                            in</a>
+                    </li>
+                    <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:signup' %}">Sign
+                            up</a></li>
+                    {% endif %}
                 </ul>
+            </div>
         </nav>
     </div>
 
@@ -63,6 +68,36 @@
         {% endblock %}
 
     </div>
+    {% comment %} <div class='container ' id='footer_container'> {% endcomment %}
+        <footer class='footer'>
+            <div class='container-fluid'>
+                <div class='row text-center'>
+                    <div class='col'>
+                        <h5>Class Offerings:</h4>
+                        <p><a href='#'>Weightliftings Basics</a></p>
+                    </div>
+                    <div class='col'>
+                        <h5>Currently Listening To:</h4>
+                        <p><a href='#'>Your Momma</a></p>
+                    </div>
+                    <div class='col'>
+                        <h5>Currently Listening To:</h4>
+                        <p><a href='#'>Your Momma</a></p>
+                    </div>
+
+                </div>
+                <div class='row'>
+                    <div class='col text-center'>
+                        <p>Created by: <a href='https://www.jacoblhughes.com'>Jacob Hughes</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+
+        {% comment %} </div> {% endcomment %}
+
 </body>
 
 </html>

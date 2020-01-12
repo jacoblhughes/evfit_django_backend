@@ -7,15 +7,32 @@
 body {
     height: 100%;
     width: 100%;
-    overflow:auto;
     background: #1f3252;
     margin: 0;
+    
+
 }
-  
+
+.mycontent{
+    min-height: 70vh;
+}
+
 #ef_logo{
     max-height: 50px;
 }
 
-.navbar_container{
+#navbar_container{
     background: white;
+}
+
+.footer {
+
+    position: static;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    margin-top: 100px
+
+
 }
