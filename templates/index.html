@@ -2,8 +2,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Welcome to the Evident Fitness Portal</h1>
-    <h3>Please sign in or register for full access</h3>
-    <br/>
-    <h3>For an example of what Evident Fitness Portal does, click <a href='#' >HERE!</a></h3>
+
+
+    {% if user.is_authenticated %}
+        <h1>Welcome back, {{user.get_username}}! </h1>
+        <h2>Current habit: </h2>
+        <h2>Current program: </h2>
+    {% else %}
+        <h1>Welcome to the Evident Fitness Portal</h1>
+        <h3>Please sign in or register for full access</h3>
+        <br/>
+        <h3>For an example of what Evident Fitness Portal does, sign in using:</h3>
+        <h4>testuser</h4>
+        <h4>EFPortal123</h4>
+    {% endif %}
+
 {% endblock %}
