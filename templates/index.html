@@ -5,7 +5,7 @@
 
 
     {% if user.is_authenticated %}
-        <h1>Welcome back, {{user.get_username}}! </h1>
+        <h1>Welcome back, {{user.first_name}}! </h1>
         <h2>Current habit: </h2>
         <h2>Current program: </h2>
     {% else %}
