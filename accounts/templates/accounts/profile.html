@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class='row'>
+    <div class="col-4">
+        {% if request.user.is_authenticated %}
+        <div class="card card-with-shadow">
+            <div class="content">
+                <h5 class="title">Currently Joined Habits</h5>
+                <ul class="list-unstyled">
+                    {% for item in user_habits_context %}
+                    <li class="habit li-with-bullet">
+                        <a href="{% url 'habits:single' slug=item.habit.slug %}">{{ item.habit.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="card card-with-shadow">
+            <div class="content">
+                <h5 class="title">Your Posts</h5>
+                <ul class="list-unstyled">
+                    
+                    <li class="habit li-with-bullet">
+                        <a href="{% url 'posts:for_user' username=request.user %}">Post History</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        <div class="card card-with-shadow">
+            <div class="content">
+                <h5 class="title">All habits</h5>
+                <ul class="list-unstyled">
+                    {% for item in all_habits_context %}
+                    <li class="habit li-with-bullet"><a
+                            href="{% url 'habits:single' slug=item.slug %}">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class='col-8'>
+        <h2>{{user.first_name}},</h2>
+
+        <p>Together the habit we are working on is: {{user.profile.habit}}</p>
+    </div>
+</div>
+{% endblock %}

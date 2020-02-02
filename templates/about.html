@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class = 'row'>
+<div class = 'col text-center'>
+<img src="{% static 'efportal/images/self_photo.png'%}"  alt='My Beauty' id='self_photo' class='img-fluid'/>
+</div>
+</div>
+
+<div class = 'row'>
+<div class = 'col'>
+<h3>Elevator Pitch</h3>
+<p>I am a growing personal trainer, dedicated to helping people live better lives through education and empowerment. My passion is working with people who want to move and feel better.</p>
+<p>I hope this website proves as a valuable resource for those looking to improve their health</p>
+<h3>Credentials</h3>
+<ul>
+<li><a href = '#'>Crossfit level 1 Trainer</a> (Certified 02/2018)</li>
+<li><a href = '#'>USAW Sports Performance Coach</a> (Certified 03/2018)</li>
+<li><a href = '#'>Precision Nutrition Level 1</a> (Certified 12/2018)</li>
+<li><a href = '#'>Waxman's Coaching Method</a> (Certified 06/2019)</li>
+</ul>
+
+<h3>Studying For:</h3>
+<ul>
+<li><a href = '#'>NSCA CSCS</a></li>
+<li><a href = '#'>NCSA CPT</a></li>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}

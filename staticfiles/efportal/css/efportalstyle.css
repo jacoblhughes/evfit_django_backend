@@ -7,15 +7,53 @@
 body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
     background: #1f3252;
     margin: 0;
+    
+
 }
-  
+
+body a{
+    color: #be7056;
+}
+
+.mycontent{
+    min-height: 100vh;
+}
+
 #ef_logo{
     max-height: 50px;
 }
 
-.navbar_container{
+#navbar_container{
+    background: white;
+}
+
+.footer {
+
+    position: static;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    margin-top: 100px;
+    padding-top: 25px;
+}
+
+#home_video_div{
+    margin: 25px 0 25px 0;
+}
+
+#self_photo{
+    max-width: 50%;
+    padding-bottom: 25px;
+}
+
+.card{
+    color: black;
+}
+
+.list-habit-div{
+    margin-bottom: 50px;
     background: white;
 }

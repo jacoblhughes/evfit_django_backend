@@ -1,0 +1,39 @@
+{% extends "habits/habit_base.html" %}
+
+{% block prehabit %}
+
+
+<h1>{{habit.name}}</h1>
+<h2> Member Count: {{habit.members.count}}</h2>
+
+  <div class="content">
+
+
+				{% if user in habit.members.all %}
+					<a href="{% url 'habits:leave' slug=habit.slug %}" class="btn btn-lg btn-fill btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Leave</a>
+				{% else %}
+					<a href="{% url 'habits:join' slug=habit.slug %}" class="btn btn-lg btn-fill btn-warning"><span class="glyphicon glyphicon-ok-circle"></span> Join</a>
+				{% endif %}
+
+
+
+</div>
+
+{% endblock %}
+
+
+{% block habit_content %}
+
+<div class="col-md-8">
+	{% if habit.posts.count == 0 %}
+	<h2>No posts in this habit yet!</h2>
+
+	{% else %}
+
+		{% for post in habit.posts.all %}
+			{% include "posts/_post.html" %}
+		{% endfor %}
+
+	{% endif %}
+</div>
+{% endblock %}

@@ -40,8 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'bootstrap4',
     'accounts',
+    'blog',
+    'habits',
+    'posts',
+    'comments',
+    'taggit',
+
 ]
 
 MIDDLEWARE = [
@@ -68,6 +75,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processor.recent_five',
+                'habits.context_processor.user_habits_context',
+                'habits.context_processor.all_habits_context',
+                'accounts.context_processor.profile_information',
             ],
         },
     },
@@ -129,11 +140,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGIN_REDIRECT_URL = 'test'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'thanks'
 
 # INTERNAL_IPS = ['127.0.0.1']
+
+#Django-Registration
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_superuser %}
+<div class='row'>
+    <div class='col text-center'>
+        <p>Admin Page</p>
+    
+    </div>
+</div>
+
+<div class='row'>
+    <div class='col text-center'>
+	{% if user.is_superuser %}
+
+    <a class="btn btn-md btn-fill btn-warning" href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-plus-sign"></span>Django Admin</a>
+
+	<a href="{% url 'habits:create' %}" class="btn btn-md btn-fill btn-warning"><span class="glyphicon glyphicon-plus-sign"></span> Create New habit!</a>
+	
+    <a href="{% url 'blog:create' %}" class="btn btn-md btn-fill btn-warning"><span class="glyphicon glyphicon-plus-sign"></span> Create New Blog!</a>
+
+    
+    
+    
+    {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

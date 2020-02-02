@@ -3,18 +3,40 @@
 {% block content %}
 
 
+<div class='row'>
+    <div class='col text-center'>
 
-    {% if user.is_authenticated %}
-        <h1>Welcome back, {{user.first_name}}! </h1>
-        <h2>Current habit: </h2>
-        <h2>Current program: </h2>
-    {% else %}
-        <h1>Welcome to the Evident Fitness Portal</h1>
-        <h3>Please sign in or register for full access</h3>
-        <br/>
-        <h3>For an example of what Evident Fitness Portal does, sign in using:</h3>
-        <h4>Username: testuser</h4>
-        <h4>Password: EFPortal123</h4>
-    {% endif %}
+        {% if user.is_authenticated %}
+        <h1>Welcome to Evident Fitness, {{user.first_name}}! </h1>
+        {% else %}
+        <h1>Welcome to Evident Fitness!</h1>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class='row' id='home_video_div'>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://player.vimeo.com/video/350146244" class='embded-responsive-item' frameborder="0"
+            allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class='row'>
+    <div class='col text-center'>
+        <h4>My Goal:</h4>
+        <p>To help you improve <i>you</i>.</p>
+        <p>Evident Fitness specializes in working with people new to pursuing a healthy lifestyle and aspires to be a
+            resource for you every step of the way. My ideal clients are curious, open-minded, willing to try new
+            things, and motivated. No two health and fitness journeys are the same and neither are the destinations. For
+            this reason, “being healthy” can take on a lot of forms. I am here to lift the fog on what it takes to look
+            and feel the way you have always wanted.</p>
+        <h4>My Method:</h4>
+        <p>Practice.</p>
+        <p>I believe that the only way to get better at anything is to practice. This is the form that my coaching takes
+            – we will practice exercising, practice eating right, and practice patience. Together, we will gain valuable
+            feedback in order to continuously progress toward your goal.</p>
+    </div>
+</div>
 
 {% endblock %}

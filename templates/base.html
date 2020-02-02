@@ -6,9 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>EF PORTAL</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
@@ -35,25 +34,41 @@
             </button>
             <div class='collapse navbar-collapse' id='collapseNavbar'>
                 <ul class='nav navbar-nav ml-auto'>
+
                     {% if user.is_authenticated %}
-                    {% comment %} <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
-                    {% endcomment %}
-                    {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                    {% endcomment %}
-                    {% comment %} <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
-                    {% endcomment %}
+                    <li class='nav-item '><a class="nav-link btn btn-simple"
+                            href="{% url 'accounts:profile'  %}"><img src = {{ user.profile.profile_image.url }}></a></li>
+                    {% endif %}
+                    <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'home' %}"
+                            class="btn btn-simple">Home</a></li>
+                    <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'about' %}"
+                            class="btn btn-simple">About</a></li>
+                    <li class='nav-item'><a href="{% url 'blog:all_blogposts' %}" class="nav-link btn btn-simple">Blog</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
                     <li class='nav-item active'><a class="nav-link btn btn-simple"
                             href="{% url 'accounts:logout' %}">Log
                             out</a></li>
+                    <li class='nav-item'><a class="nav-link btn btn-simple"
+                            href="{% url 'habits:all' %}">Habits</a></li>
+                    <li class='nav-item'><a class="nav-link btn btn-simple"
+                            href="{% url 'posts:create' %}">Post</a></li>
                     {% else %}
-                    {% comment %} <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                    {% endcomment %}
                     <li class='nav-item active'><a class="nav-link btn btn-simple" href="{% url 'accounts:login' %}">Log
                             in</a>
                     </li>
                     <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'accounts:signup' %}">Sign
                             up</a></li>
                     {% endif %}
+                    <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'contact' %}"
+                            class="btn btn-simple">Contact</a></li>
+                    {% if user.is_superuser %}
+                    <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'efadmin' %}"
+                            class="btn btn-simple">EFAdmin</a></li>
+                    {% endif %}
+
                 </ul>
             </div>
         </nav>
@@ -68,35 +83,40 @@
         {% endblock %}
 
     </div>
-    {% comment %} <div class='container ' id='footer_container'> {% endcomment %}
-        <footer class='footer'>
-            <div class='container-fluid'>
-                <div class='row text-center'>
-                    <div class='col'>
-                        <h5>Class Offerings:</h4>
-                        <p><a href='#'>Weightliftings Basics</a></p>
-                    </div>
-                    <div class='col'>
-                        <h5>Currently Listening To:</h4>
-                        <p><a href='#'>Your Momma</a></p>
-                    </div>
-                    <div class='col'>
-                        <h5>Currently Listening To:</h4>
-                        <p><a href='#'>Your Momma</a></p>
-                    </div>
-
+    <footer class='footer'>
+        <div class='container-fluid'>
+            <div class='row text-center'>
+                <div class='col'>
+                    <h4>Class Offerings:</h4>
+                    <p><a href='#'>Weightliftings Basics</a></p>
                 </div>
-                <div class='row'>
-                    <div class='col text-center'>
-                        <p>Created by: <a href='https://www.jacoblhughes.com'>Jacob Hughes</a></p>
-                    </div>
-
+                <div class='col'>
+                    <h4>Listening To:</h4>
+                    <h5>Lady Day and John Coltrane - Gil Scott-Heron</h5>
+                    <audio controls>
+                        <source src="{% static 'efportal/audio/musica.mp3' %}" type="audio/mpeg">
+                    </audio>
                 </div>
+                <div class='col'>
+                    <h4>Newests Posts:</h4>
+                    <ul class = 'list-unstyled list-group-flush'>
+                    {% for p in recent_five %}
+                    <li class='list-group-item' ><a href={% url 'blog:blogpost_detail' p.pk p.slug %}>{{ p.title }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
             </div>
-        </footer>
+            <div class='row'>
+                <div class='col text-center'>
+                    <p>Created by: <a href='https://www.jacoblhughes.com'>Jacob Hughes</a></p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
 
 
-        {% comment %} </div> {% endcomment %}
 
 </body>
 

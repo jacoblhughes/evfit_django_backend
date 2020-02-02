@@ -13,8 +13,12 @@ body {
 
 }
 
+body a{
+    color: #be7056;
+}
+
 .mycontent{
-    min-height: 70vh;
+    min-height: 100vh;
 }
 
 #ef_logo{
@@ -32,7 +36,24 @@ body {
     width: 100%;
     height: auto;
     background-color: white;
-    margin-top: 100px
+    margin-top: 100px;
+    padding-top: 25px;
+}
 
+#home_video_div{
+    margin: 25px 0 25px 0;
+}
 
+#self_photo{
+    max-width: 50%;
+    padding-bottom: 25px;
+}
+
+.card{
+    color: black;
+}
+
+.list-habit-div{
+    margin-bottom: 50px;
+    background: white;
 }

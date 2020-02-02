@@ -1,0 +1,15 @@
+{% extends "habits/habit_base.html" %}
+{% load bootstrap4 %}
+
+{% block habit_content %}
+<div class = 'col-12'>
+<h4>Create A New Habit</h4>
+</div>
+<div class = 'col-12'>
+  <form method="POST" action="{% url 'habits:create' %}" id="habitForm">
+  	{% csrf_token %}
+  	{% bootstrap_form form %}
+  	<input type="submit" value="Create" class="btn btn-primary btn-large">
+  </form>
+</div>
+{% endblock %}

@@ -4,6 +4,11 @@
 {% block content %}
 <div class = 'container'>
     <h1>Login</h1>
+    <br />
+    <h3>For an example of what Evident Fitness Portal does, sign in using:</h3>
+    <h4>Username: testuser</h4>
+    <h4>Password: EFPortal123</h4>
+    <br />
     <form method = 'POST'>
         {% csrf_token %}
         {% bootstrap_form form %}

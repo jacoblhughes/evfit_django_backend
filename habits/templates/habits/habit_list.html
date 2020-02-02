@@ -1,0 +1,46 @@
+{% extends "habits/habit_base.html" %}
+
+{% block prehabit %}
+
+<div class="col-12">
+	<div class="content">
+		{% if user.is_authenticated %}
+		<h2>
+			Welcome back, {{user.first_name}} (<a href="{% url 'posts:for_user' username=user.username %}">@{{user.username }}</a>)
+		</h2>
+
+    {% endif %}
+			<h5>This is the place to dicuss habits and either struggles or successes with them. I hope it serves as a positive influence.</h5>
+
+			<p>Select a habit to see the discussion</p>
+	</div>
+
+</div>
+
+{% endblock %}
+
+{% block habit_content %}
+<div class="col-md-8">
+	<div class="list-habit">
+		{% for habit in object_list %}
+		<div class = "list-habit-div">
+		  <a class="list-habit-item" href="{% url 'habits:single' slug=habit.slug %}">
+			     <h3 class="title list-habit-item-heading">{{ habit.name }}</h3>
+			<div class="list-habit-item-text container-fluid">
+				{{ habit.description_html|safe }}
+				<div class="row">
+					<div class="col-md-4">
+						<span class="badge">{{ habit.members.count }}</span> member{{ habit.members.count|pluralize }}
+					</div>
+					<div class="col-md-4">
+						<span class="badge">{{ habit.posts.count }}</span> post{{ habit.posts.count|pluralize }}
+					</div>
+				</div>
+			</div>
+		</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

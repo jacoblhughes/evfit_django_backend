@@ -1,0 +1,39 @@
+.mycontent{
+    padding-top: 100px;
+    height: 100%;
+    color: white;
+}
+  
+body {
+    height: 100%;
+    width: 100%;
+    background: #1f3252;
+    margin: 0;
+    
+
+}
+
+.mycontent{
+    min-height: 100vh;
+}
+
+#ef_logo{
+    max-height: 50px;
+}
+
+#navbar_container{
+    background: white;
+}
+
+.footer {
+
+    position: static;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    margin-top: 100px;
+    padding-top: 25px;
+
+
+}

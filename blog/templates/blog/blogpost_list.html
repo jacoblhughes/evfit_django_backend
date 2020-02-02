@@ -1,0 +1,18 @@
+{% extends "blog/blogpost_base.html" %}
+{% load humanize %}
+
+{% block blogpost_content %}
+	{% for blogpost in blogpost_list %}
+  	<div class = 'col-12 left'>
+	<div class="card mb-3">
+
+	<h3 class='card-title'>{{ blogpost.title }}</h3>
+	<p class = 'card-text'>{{blogpost.content|slice:":150"}}</p>
+	<a href="{% url 'blog:blogpost_detail' blogpost.pk blogpost.slug  %}" class="btn btn-primary col-3">Read More &rarr;</a>
+	<p class = 'card-text text-muted'><sub>{{ blogpost.created_on }}</sub></p>
+	
+</div>
+</div>
+
+	{% endfor %}
+{% endblock blogpost_content%}
