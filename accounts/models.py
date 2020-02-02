@@ -16,7 +16,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique = True)
     birth_date = models.DateField(null=True, blank = True)
     profile_image = models.ImageField(upload_to = 'profile_image',blank = True, default="efportal/images/default.png")
-    habit = models.ForeignKey('habits.Habit', related_name='profile', null=True, on_delete=models.CASCADE, default = 1)
+    habit = models.ForeignKey('habits.Habit', related_name='profile', null=True, on_delete=models.CASCADE)
 
     @receiver(post_save,sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
