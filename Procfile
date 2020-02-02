@@ -1,1 +1,2 @@
-web: gunicorn efportal.wsgi --timeout=1200
+release: python manage.py migrate --noinput
+web: gunicorn efportal.wsgi
