@@ -27,6 +27,7 @@ body a{
 
 #navbar_container{
     background: white;
+    white-space: nowrap;
 }
 
 .footer {
@@ -57,3 +58,21 @@ body a{
     margin-bottom: 50px;
     background: white;
 }
+
+.avatar-navbar {
+    vertical-align: middle;
+    max-width: 4em;
+    max-height: 4em;
+    border-radius: 50%;
+  }
+
+.img-link{
+    text-align: center;
+}
+
+.avatar-profile {
+    vertical-align: middle;
+    max-width: 10em;
+    max-height: 10em;
+    border-radius: 50%;
+  }

@@ -36,8 +36,8 @@
                 <ul class='nav navbar-nav ml-auto'>
 
                     {% if user.is_authenticated %}
-                    <li class='nav-item '><a class="nav-link btn btn-simple"
-                            href="{% url 'accounts:profile'  %}"><img src = {{ user.profile.profile_image.url }}></a></li>
+                    <li class='nav-item '><a class="nav-link img-link"
+                            href="{% url 'accounts:profile'  %}"><img class = 'avatar-navbar' src = {{ user.profile.profile_image.url }}></a></li>
                     {% endif %}
                     <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'home' %}"
                             class="btn btn-simple">Home</a></li>

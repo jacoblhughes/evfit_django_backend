@@ -15,3 +15,6 @@ class SignUp(CreateView):
 
 class ProfileView(TemplateView):
     template_name = 'accounts/profile.html'
+
+class DocumentProfileView(TemplateView):
+    template_name = 'accounts/documentprofile_program.html' 

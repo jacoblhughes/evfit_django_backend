@@ -6,6 +6,10 @@
 <div class='row'>
     <div class="col-4">
         {% if request.user.is_authenticated %}
+        <div class = 'card card-with-shadow'>
+            <img class = 'avatar-profile' src = {{ user.profile.profile_image.url }}>
+            <button >Change Profile Pic</button>
+        </div>
         <div class="card card-with-shadow">
             <div class="content">
                 <h5 class="title">Currently Joined Habits</h5>
@@ -47,6 +51,7 @@
         <h2>{{user.first_name}},</h2>
 
         <p>Together the habit we are working on is: {{user.profile.habit}}</p>
+        <p>Here is your program: <a href={{ user.documentprofile.program.url }}>Current Program</a>
     </div>
 </div>
 {% endblock %}

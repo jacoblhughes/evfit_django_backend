@@ -7,6 +7,10 @@ from django.dispatch import receiver
 
 # Create your models here.
 
+def upload_path_documentprofile(instance, filename):
+    return 'efportal/user_programs/{0}/{1}'.format(user.username, filename)
+
+
 class EFUser(auth.models.User, auth.models.PermissionsMixin):
 
     def __str__(self):
@@ -15,7 +19,7 @@ class EFUser(auth.models.User, auth.models.PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique = True)
     birth_date = models.DateField(null=True, blank = True)
-    profile_image = models.ImageField(upload_to = 'profile_image',blank = True, default="efportal/images/default.png")
+    profile_image = models.ImageField(upload_to = 'efportal/profile_image',blank = True, default="efportal/profile_image/default.png")
     habit = models.ForeignKey('habits.Habit', related_name='profile', null=True, on_delete=models.CASCADE)
 
     @receiver(post_save,sender=User)
@@ -25,3 +29,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return "{} Profile".format(self.user.username)
+
+
+class DocumentProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique = True)
+    program = models.FileField(null=True, blank = True, default = "efportal/user_programs/welcome.xlsx", upload_to=upload_path_documentprofile )
+
+    @receiver(post_save, sender = User)
+    def create_user_program(sender, instance, created, **kwargs):
+        if created:
+            ProgramDocument.objects.create(user=instance)
+    
+    def __str__(self):
+        return "{} Program Document".format(self.user.username)
