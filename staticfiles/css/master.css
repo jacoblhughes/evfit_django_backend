@@ -1,3 +1,9 @@
+@media (min-width: 100px){
+  .container{
+    width: 40%;
+  }
+}
+
 .mycontent{
   padding-top: 100px;
   border: 10px solid red;

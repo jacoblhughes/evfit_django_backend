@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Your Logged Data</h3>
+
+<p>Habits: <a  class = ' btn btn-simple' href  = {% url "tracking:habit_table"  %}>Habit Data</a></p>
+{% include "tracking/habit_graph.html" %}
+
+<p>Weight: <a  class = ' btn btn-simple' href  = {% url "tracking:weight_table"  %}>Weight Data</a></p>
+{% include "tracking/weight_graph.html" %}
+
+<p>1RM Back Squat: <a  class = ' btn btn-simple' href  = {% url "tracking:rmbacksquat_table"  %}>RM Back Squat Data</a></p>
+{% include "tracking/rmbacksquat_graph.html" %}
+
+{% endblock %}

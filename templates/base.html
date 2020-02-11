@@ -17,8 +17,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'efportal/css/efportalstyle.css' %}" />
-
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
 </head>
 
@@ -47,14 +51,12 @@
                     </li>
 
                     {% if user.is_authenticated %}
-
-                    <li class='nav-item active'><a class="nav-link btn btn-simple"
-                            href="{% url 'accounts:logout' %}">Log
-                            out</a></li>
                     <li class='nav-item'><a class="nav-link btn btn-simple"
                             href="{% url 'habits:all' %}">Habits</a></li>
                     <li class='nav-item'><a class="nav-link btn btn-simple"
                             href="{% url 'posts:create' %}">Post</a></li>
+                    <li class='nav-item'><a class="nav-link btn btn-simple"
+                            href="{% url 'tracking:tracking' %}">Tracking</a></li>
                     {% else %}
                     <li class='nav-item active'><a class="nav-link btn btn-simple" href="{% url 'accounts:login' %}">Log
                             in</a>
@@ -64,6 +66,13 @@
                     {% endif %}
                     <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'contact' %}"
                             class="btn btn-simple">Contact</a></li>
+                    {% if user.is_authenticated %}
+
+                    <li class='nav-item active'><a class="nav-link btn btn-simple"
+                            href="{% url 'accounts:logout' %}">Log
+                            out</a></li>
+                    {% endif %}
+
                     {% if user.is_superuser %}
                     <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'efadmin' %}"
                             class="btn btn-simple">EFAdmin</a></li>

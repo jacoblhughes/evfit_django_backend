@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title_text %}Add Measurement{% endblock %}
+
+{% block content %}
+    {% if show_form %}
+    <form method="POST">
+        <div class="row">
+            <div class="col">
+                {{ form.as_p }}
+                {% csrf_token %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                &#160;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+            </div>
+        </div>
+    </form>
+    {% else %}
+        <div class="row">
+            <div class="col">
+                You've already submitted a measurement for today!
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

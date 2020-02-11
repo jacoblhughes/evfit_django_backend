@@ -1,3 +1,9 @@
+@media (min-width: 768px){
+    .container{
+      width: 70%;
+    }
+  }
+
 .mycontent{
     padding-top: 100px;
     height: 100%;
@@ -9,8 +15,6 @@ body {
     width: 100%;
     background: #1f3252;
     margin: 0;
-    
-
 }
 
 body a{
@@ -42,11 +46,12 @@ body a{
 }
 
 #home_video_div{
-    margin: 25px 0 25px 0;
+    margin: 25px auto 25px auto;
+    width:75%;
 }
 
 #self_photo{
-    max-width: 50%;
+    max-width: 25%;
     padding-bottom: 25px;
 }
 

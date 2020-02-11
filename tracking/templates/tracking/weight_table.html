@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            &#160;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Taken</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for measurement in object_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.revcounter }}</th>
+                        <td>{{ measurement.weight }}&#160;{{ measurement.unit }}</td>
+                        <td>{{ measurement.created }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

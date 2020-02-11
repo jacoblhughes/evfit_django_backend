@@ -30,6 +30,9 @@ urlpatterns = [
     path('thanks/', views.ThanksPage.as_view(), name = 'thanks'),
     path('habits/', include('habits.urls', namespace ='habits')),
     path('posts/', include('posts.urls', namespace ='posts')),
-    path('efadmin/', views.EFAdminPage.as_view(), name = 'efadmin')
+    path('efadmin/', views.EFAdminPage.as_view(), name = 'efadmin'),
+    path('tracking/', include('tracking.urls', namespace ='tracking')),
+
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
