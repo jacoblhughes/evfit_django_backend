@@ -35,7 +35,7 @@ class Profile(models.Model):
 class DocumentProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique = True)
-    program = models.FileField(upload_to = 'efportal/user_programs/', null=True, blank = True, default = "efportal/user_programs/welcome.xlsx")
+    program = models.FileField(upload_to = 'efportal/user_programs/', blank = True, default = "efportal/user_programs/welcome.xlsx")
 
     @receiver(post_save, sender = User)
     def create_user_program(sender, instance, created, **kwargs):
@@ -43,4 +43,4 @@ class DocumentProfile(models.Model):
             DocumentProfile.objects.create(user=instance)
     
     def __str__(self):
-        return "{} Program Document".format(self.user.username)
+        return "{} Document Profile".format(self.user.username)
