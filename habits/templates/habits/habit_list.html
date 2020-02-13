@@ -6,11 +6,11 @@
 	<div class="content">
 		{% if user.is_authenticated %}
 		<h2>
-			Welcome back, {{user.first_name}} (<a href="{% url 'posts:for_user' username=user.username %}">@{{user.username }}</a>)
+			{{user.first_name}} (<a href="{% url 'posts:for_user' username=user.username %}">@{{user.username }}</a>)
 		</h2>
 
     {% endif %}
-			<h5>This is the place to dicuss habits and either struggles or successes with them. I hope it serves as a positive influence.</h5>
+			<p>This is the place to dicuss habits and either struggles or successes with them. I hope it serves as a positive influence.</p>
 
 			<p>Select a habit to see the discussion</p>
 	</div>
@@ -20,12 +20,12 @@
 {% endblock %}
 
 {% block habit_content %}
-<div class="col-md-8">
+<div class="col-md-12">
 	<div class="list-habit">
 		{% for habit in object_list %}
 		<div class = "list-habit-div">
 		  <a class="list-habit-item" href="{% url 'habits:single' slug=habit.slug %}">
-			     <h3 class="title list-habit-item-heading">{{ habit.name }}</h3>
+			     <h3 class="title list-habit-item-heading">{{ habit.name }}</h3></a>
 			<div class="list-habit-item-text container-fluid">
 				{{ habit.description_html|safe }}
 				<div class="row">
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 			</div>
-		</a>
+		
 		</div>
 		{% endfor %}
 	</div>
