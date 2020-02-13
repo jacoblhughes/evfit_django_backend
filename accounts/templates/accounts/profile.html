@@ -51,7 +51,7 @@
         <h2>{{user.first_name}},</h2>
 
         <p>Together the habit we are working on is: {{user.profile.habit}}</p>
-        <p>Here is your program: <a href={{ user.DocumentProfile.program.url }}>Current Program</a>
+        {% comment %} <p>Here is your program: <a href={{ user.DocumentProfile.program.url }}>Current Program</a> {% endcomment %}
     </div>
 </div>
 {% endblock %}
