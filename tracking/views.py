@@ -236,7 +236,7 @@ class MaxTableView(LoginRequiredMixin, ListView):
         return data
 
 class AddMaxMultipleView(LoginRequiredMixin, CreateView):
-    fields = ['max_item','weight','unit','created']
+    fields = ['max_item','weight','created']
     template_name = 'tracking/max_form.html'
     success_url = reverse_lazy('tracking:tracking')
 

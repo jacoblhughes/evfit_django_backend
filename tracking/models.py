@@ -80,6 +80,11 @@ class MaxMultipleRecord(models.Model):
     max_user = models.ForeignKey(User, on_delete=models.CASCADE,)
     created = models.DateField(auto_now_add=True)
 
+    @receiver(post_save,sender=User)
+    def create_max_record(sender, instance, created, **kwargs):
+        if created:
+            MaxMultipleRecord.objects.create(max_user=instance)
+
     def __str__(self):
         return '{}'.format(
             self.max_user.username
