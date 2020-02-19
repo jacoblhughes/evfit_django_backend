@@ -14,16 +14,6 @@ class WeightMeasurementAdmin(admin.ModelAdmin):
 admin.site.register(models.WeightRecord, WeightRecordAdmin)
 admin.site.register(models.WeightMeasurement, WeightMeasurementAdmin)
 
-class RMBackSquatRecordAdmin(admin.ModelAdmin):
-    ordering = ['rmbacksquat_user__username']
-
-
-class RMBackSquatMeasurementAdmin(admin.ModelAdmin):
-    ordering = ['-created']
-
-
-admin.site.register(models.RMBackSquatRecord, RMBackSquatRecordAdmin)
-admin.site.register(models.RMBackSquatMeasurement, RMBackSquatMeasurementAdmin)
 
 class HabitRecordAdmin(admin.ModelAdmin):
     ordering = ['habit_user__username']
@@ -35,3 +25,10 @@ class HabitMeasurementAdmin(admin.ModelAdmin):
 
 admin.site.register(models.HabitRecord, HabitRecordAdmin)
 admin.site.register(models.HabitMeasurement, HabitMeasurementAdmin)
+
+
+
+admin.site.register(models.MaxListItem)
+admin.site.register(models.MaxMultipleRecord)
+admin.site.register(models.MaxMultipleMeasurement)
+

@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Weight</th>
+                        <th scope="col">Max</th>
                         <th scope="col">Taken</th>
                     </tr>
                 </thead>
@@ -20,7 +20,7 @@
                 {% for measurement in object_list %}
                     <tr>
                         <th scope="row">{{ forloop.revcounter }}</th>
-                        <td>{{ measurement.rmbacksquat }}&#160;{{ measurement.unit }}</td>
+                        <td>{{ measurement.max_item }}&#160;{{ measurement.weight }}&#160;{{measurement.unit}}</td>
                         <td>{{ measurement.created }}</td>
                     </tr>
                 {% endfor %}

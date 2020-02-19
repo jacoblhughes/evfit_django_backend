@@ -6,11 +6,13 @@ app_name = 'tracking'
 
 urlpatterns = [
     path('', tracking.views.TrackingHome.as_view(), name='tracking'),
+    path('weight_add', tracking.views.AddWeightView.as_view(), name='weight_add'),
     path('weight_data/', tracking.views.WeightData.as_view(), name='weight_data'),
-    path('weight_table/', tracking.views.WeightTableView.as_view(), name='weight_table'),
-    path('rmbacksquat_data/', tracking.views.RMBackSquatData.as_view(), name='rmbacksquat_data'),
-    path('rmbacksquat_table/', tracking.views.RMBackSquatTableView.as_view(), name='rmbacksquat_table'),
+    path('weight_table/', tracking.views.WeightTableView.as_view(), name='weight_table'),\
+    path('habit_add', tracking.views.AddHabitView.as_view(), name='habit_add'),
     path('habit_data/', tracking.views.HabitData.as_view(), name='habit_data'),
     path('habit_table/', tracking.views.HabitTableView.as_view(), name='habit_table'),
-    path('add/', tracking.views.AddWeightMeasurementView.as_view(), name='add'),
+    path('max_add', tracking.views.AddMaxMultipleView.as_view(), name='max_add'),
+    path('max_data/', tracking.views.MaxData.as_view(), name='max_data'),
+    path('max_table/', tracking.views.MaxTableView.as_view(), name='max_table'),
 ]

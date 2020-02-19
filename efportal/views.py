@@ -7,6 +7,10 @@ from django.views import generic
 
 from braces.views import SelectRelatedMixin
 
+from django.shortcuts import render
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
+
 class HomePage(TemplateView):
     template_name = 'index.html'
 

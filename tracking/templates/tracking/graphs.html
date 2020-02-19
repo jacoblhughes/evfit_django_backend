@@ -1,0 +1,227 @@
+
+
+<div class="row graphChoiceDiv" id='habit_graph_row'>
+    <div class="col-12">
+        <div id="habit_graph"></div>
+
+    </div>
+</div>
+
+    <div class="row graphChoiceDiv" id='weight_graph_row'>
+        <div class="col-12">
+            <div class='' id="weight_graph"></div>
+
+        </div>
+    </div>
+
+<div class="row graphChoiceDiv" id='max_graph_row'>
+    <div class="col-12">
+        <div class=''  id="max_graph"></div>
+
+    </div>
+</div>
+
+<script>
+
+    const username = "{{user.username}}"
+    const date_user_joined = new Date("{{user.date_joined.isoformat}}")
+    const margin = {top: 30, right: 30, bottom: 30, left: 30};
+    const width = 600 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
+    const padding = 10;
+    const circleRadius = 4;
+
+
+    d3.json("{% url "tracking:habit_data" %}").then(function (data) {
+        console.log(data)
+        const habitcount = data['count']
+        const habitobjects = data['habits']
+        const dataset = data[username]['habitmeasurements'];
+
+        const svg = d3.select('#habit_graph')
+            .append('svg')
+            .attr("viewBox", `0 0 600 300`)
+            .append("g")
+                .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+        const latest_entry = d3.max(dataset.map(function(d) {return new Date(d.created)}))
+        const latest_entry_plus = latest_entry.setDate(latest_entry.getDate() + 5)
+        const latest_entry_minus = latest_entry.setDate(latest_entry.getDate() - 19)
+
+        var x = d3.scaleTime()
+            .domain([new Date(latest_entry_minus), new Date(latest_entry_plus)])
+            .range([0, width ]);
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        var y = d3.scaleLinear()
+            .domain([0, habitcount])
+            .range([ height, 0]);
+        svg.append("g")
+            .call(d3.axisLeft(y).ticks(habitcount).tickSize(0).tickFormat(function(d){ return habitobjects[d]; }))
+            .selectAll("text")
+            .attr('dx', '10em')
+            .attr('dy', '1.25em')
+            .style('text-anchor','start')
+
+        svg.append('g')
+            .selectAll("dot")
+            .data(dataset)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return x( new Date(d.created)); } )
+            .attr("cy", function (d) { return y(d.habit); } )
+            .attr("r", circleRadius)
+            .style("fill", function(d){
+                if (d.reply == "Yes"){
+                    return "white"
+                }
+                else{
+                    return "#ae4d2d"
+                }
+            })
+
+        svg.append('text')
+                .attr("y", 0 - (margin.top / 2))
+                .attr("x", width/2)
+                .attr("text-anchor", "middle")  
+                .style("font-size", "16px") 
+                .style("text-decoration", "underline")
+                .style('fill', 'white')  
+                .text('Habit Tracking');
+
+        });
+
+    d3.json("{% url "tracking:weight_data" %}").then(function (data) {
+            console.log(data)
+
+            const dataset = data[username]['weightmeasurements'];
+
+            const svg = d3.select('#weight_graph')
+                .append('svg')
+                .attr("viewBox", `0 0 600 300`)
+                .append("g")
+                    .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+            
+            const latest_entry = d3.max(dataset.map(function(d) {return new Date(d.created)}))
+            const latest_entry_plus = latest_entry.setDate(latest_entry.getDate() + 10)
+            // Add X axis
+            var x = d3.scaleTime()
+                .domain([date_user_joined, latest_entry_plus])
+                .range([ 0, width ]);
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            const biggest_entry = d3.max(dataset.map(function(d) {return d.weight}))
+            const biggest_entry_plus = biggest_entry + 30
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, biggest_entry_plus])
+                .range([ height, 0]);
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // Add dots
+            svg.append('g')
+                .selectAll("dot")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr("cx", function (d) { return x( new Date(d.created)); } )
+                .attr("cy", function (d) { return y(d.weight); } )
+                .attr("r", circleRadius)
+                .style("fill", "white")
+
+            svg.append('text')
+                .attr("y", 0 - (margin.top / 2))
+                .attr("x", width/2)
+
+                .attr("text-anchor", "middle")  
+                .style("font-size", "16px") 
+                .style("text-decoration", "underline")
+                .style('fill', 'white')  
+                .text('Body Weight');
+
+            })
+
+
+
+    d3.json("{% url "tracking:max_data" %}").then(function (data) {
+            console.log(data)
+
+        const dataset = data[username]['maxitemmeasurements'];
+
+    for (const maxItem in dataset){
+
+        maxItemArray = dataset[maxItem]
+        const svg = d3.select('#max_graph')
+            .append('svg')
+            .attr("viewBox", `0 0 600 300`)
+            .append("g")
+                .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        const latest_entry = d3.max(maxItemArray.map(function(d) {return new Date(d.created)}))
+        const latest_entry_plus = latest_entry.setDate(latest_entry.getDate() + 10)
+
+        var x = d3.scaleTime()
+            .domain([date_user_joined, latest_entry_plus])
+            .range([ 0, width ]);
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        const biggest_entry = d3.max(maxItemArray.map(function(d) {return d.weight}))
+        const biggest_entry_plus = biggest_entry + 50
+        // Add Y axis
+        var y = d3.scaleLinear()
+            .domain([0, biggest_entry_plus])
+            .range([ height, 0]);
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        svg.append('g')
+            .selectAll("circle")
+            .data(maxItemArray)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return x( new Date(d.created)); } )
+            .attr("cy", function (d) { return y(d.weight); } )
+            .attr("r", circleRadius)
+            .style("fill", "white")
+
+        svg.append("line")
+            .data(maxItemArray)
+            .attr("fill", "none")
+            .attr("stroke", "white")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+            .x(function(d) {  return x( new Date(d.created)); })
+            .y(function(d) { return y(d.weight); }))
+        
+        svg.append('text')
+            .attr("y", 0 - (margin.top / 2))
+            .attr("x", width/2)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")
+            .style('fill', 'white')  
+            .text(maxItem);
+
+
+        
+            }
+        });
+    
+
+    
+
+
+
+
+</script>

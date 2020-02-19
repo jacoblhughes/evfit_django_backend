@@ -1,14 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3>Your Logged Data</h3>
+<h3>Your Graph Data</h3>
+<div class="row" id='graphButtonDiv'>
+    <div class="col">
+        <div id="graphChoice" class="btn-group btn-group-toggle center" data-toggle="buttons">
 
-<p>Habits: <a  class = ' btn btn-simple' href  = {% url "tracking:habit_table"  %}>Habit Data</a></p>
-{% include "tracking/habit_graph.html" %}
+            <label name ='graphChoice' class="btn btn-outline-secondary btn-sm active "><input type="radio" name="graphChoice" value="habit">Habits</label>
 
-<p>Weight: <a  class = ' btn btn-simple' href  = {% url "tracking:weight_table"  %}>Weight Data</a></p>
-{% include "tracking/weight_graph.html" %}
+            <label name ='graphChoice' class="btn btn-outline-secondary btn-sm"><input type="radio" name="graphChoice" value="weight">Body
+                Weight</label>
 
-<p>1RM Back Squat: <a  class = ' btn btn-simple' href  = {% url "tracking:rmbacksquat_table"  %}>RM Back Squat Data</a></p>
-{% include "tracking/rmbacksquat_graph.html" %}
+            <label name ='graphChoice' class="btn btn-outline-secondary btn-sm"><input type="radio" name="graphChoice" value="max">1RM
+                Maxes</label>
 
+        </div>
+    </div>
+</div>
+{% include "tracking/graphs.html" %}
+
+<script>
+$(document).ready(function() {
+    $("div.graphChoiceDiv").hide();
+    $("#habit_graph_row").show();
+    $("label[name='graphChoice']").click(function(){
+        var test = $(this).children('input:radio').val();
+
+        $("div.graphChoiceDiv").hide();
+        $("#"+test+"_graph_row").show();
+
+    });
+
+});
+</script>
 {% endblock %}

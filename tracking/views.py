@@ -11,8 +11,15 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
 from django.views.generic.list import ListView
 from django.views import View
-from .models import WeightMeasurement, WeightRecord, RMBackSquatMeasurement, RMBackSquatRecord, HabitRecord, HabitMeasurement
+from .models import WeightMeasurement, WeightRecord, HabitRecord, HabitMeasurement, MaxListItem, MaxMultipleRecord, MaxMultipleMeasurement
 from habits.models import Habit
+from tracking.models import HabitMeasurement
+
+from braces.views import SelectRelatedMixin
+
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
+
 
 class TrackingHome(TemplateView):
     template_name = 'tracking/tracking_base.html'
@@ -64,16 +71,15 @@ class WeightTableView(LoginRequiredMixin, ListView):
         return data
 
 
-class AddWeightMeasurementView(LoginRequiredMixin, CreateView):
-
+class AddWeightView(LoginRequiredMixin, CreateView):
     model = WeightMeasurement
-    fields = ['weight', 'unit']
-    template_name = 'tracking/add.html'
-    success_url = reverse_lazy('home')
+    fields = ['weight', 'created']
+    template_name = 'tracking/weight_form.html'
+    success_url = reverse_lazy('tracking:tracking')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['page'] = 'add'
+        data['page'] = 'weight_add'
         data['show_form'] = True
 
         latest = WeightMeasurement.objects.filter(
@@ -89,51 +95,6 @@ class AddWeightMeasurementView(LoginRequiredMixin, CreateView):
         form.instance.weight_record = WeightRecord.objects.get(weight_user=self.request.user)
         return super().form_valid(form)
 
-class RMBackSquatData(View):
-    def get(self, request):
-        rmbacksquat_data = {}
-        unit = request.GET.get('unit')
-        for record in RMBackSquatRecord.objects.all():
-            name = record.rmbacksquat_user.username
-            name = name.strip()
-            rmbacksquat_data[name] = {
-                # 'colour': _get_preferred_colour(record),
-                'rmbacksquatmeasurements': []
-            }
-            for rmbacksquatmeasurement in record.rmbacksquatmeasurements.all():
-                rmbacksquat_data[name]['rmbacksquatmeasurements'].append(
-                    {'created': rmbacksquatmeasurement.created, 'rmbacksquat': rmbacksquatmeasurement.rmbacksquat, 'unit': rmbacksquatmeasurement.unit}
-                )
-        return JsonResponse(rmbacksquat_data)
-
-    # return HttpResponse(status=400, reason='Only GET requests are allowed')
-
-
-class RMBackSquatTableView(LoginRequiredMixin, ListView):
-
-    model = RMBackSquatMeasurement
-    template_name = 'tracking/rmbacksquat_table.html'
-
-    def get_queryset(self):
-        return RMBackSquatMeasurement.objects.filter(
-            rmbacksquat_record=RMBackSquatRecord.objects.get(rmbacksquat_user=self.request.user))
-
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['page'] = 'rmbacksquat_table'
-        unit = 'lb'
-
-        measurements = []
-
-        for measurement in data['object_list']:
-            measurements.append({
-                'rmbacksquat': measurement.rmbacksquat,
-                'created': measurement.created if measurement.created != date.today() else 'Today',
-                'unit': measurement.unit,
-            })
-
-        data['object_list'] = measurements
-        return data
 
 class HabitData(View):
     def get(self, request):
@@ -183,4 +144,118 @@ class HabitTableView(LoginRequiredMixin, ListView):
             })
 
         data['object_list'] = measurements
+
+        # x_data = [0,1,2,3]
+        # y_data = [x**2 for x in x_data]
+        # plotly_div = plot([Scatter(x=x_data, y=y_data,
+        #                 mode='lines', name='test',
+        #                 opacity=0.8, marker_color='green')],
+        #        output_type='div')
+        # data['plotly'] = plotly_div
+
         return data
+
+class AddHabitView(LoginRequiredMixin, CreateView):
+    fields = ['habit','reply','created']
+    template_name = 'tracking/habit_form.html'
+    success_url = reverse_lazy('tracking:tracking')
+
+    model = HabitMeasurement
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['page'] = 'habit_form'
+        data['show_form'] = True
+
+        latest = HabitMeasurement.objects.filter(
+            habit_record=HabitRecord.objects.get(habit_user=self.request.user)
+        )
+
+        if latest and latest[0].created == date.today():
+            data['show_form'] = False
+
+        return data
+
+    def form_valid(self, form):
+        form.instance.habit_record = HabitRecord.objects.get(habit_user=self.request.user)
+        return super().form_valid(form)
+
+
+class MaxData(View):
+    def get(self, request):
+        maxitem_data = {}
+        maxitem_data['count'] = MaxListItem.objects.all().count()
+        maxitem_data['maxitems'] = {}
+        for maxitem in MaxListItem.objects.all():
+            maxitem_data['maxitems'].update({maxitem.pk:maxitem.max_item_name})
+        weight = request.GET.get('weight')
+        for record in MaxMultipleRecord.objects.all():
+            name = record.max_user.username
+            name = name.strip()
+            maxitem_data[name] = {}
+            maxitem_data[name]['maxitemmeasurements']={}
+
+            for maxitemmeasurement in record.maxitemmeasurements.all():
+
+                if maxitemmeasurement.max_item.max_item_name not in maxitem_data[name]['maxitemmeasurements']:
+                    maxitem_data[name]['maxitemmeasurements'][maxitemmeasurement.max_item.max_item_name] = []
+                maxitem_data[name]['maxitemmeasurements'][maxitemmeasurement.max_item.max_item_name].append(
+                    {'created': maxitemmeasurement.created, 'weight': maxitemmeasurement.weight}
+                )
+        return JsonResponse(maxitem_data)
+
+    # return HttpResponse(status=400, reason='Only GET requests are allowed')
+
+
+class MaxTableView(LoginRequiredMixin, ListView):
+
+    model = MaxMultipleMeasurement
+    template_name = 'tracking/max_table.html'
+ 
+    def get_queryset(self):
+        return MaxMultipleMeasurement.objects.filter(
+            max_record=MaxMultipleRecord.objects.get(max_user=self.request.user))
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['page'] = 'max_table'
+        
+
+        measurements = []
+
+        for measurement in data['object_list']:
+            measurements.append({
+                'max_item': measurement.max_item,
+                'created': measurement.created if measurement.created != date.today() else 'Today',
+                'weight': measurement.weight,
+                'unit':measurement.unit,
+            })
+
+        data['object_list'] = measurements
+
+        return data
+
+class AddMaxMultipleView(LoginRequiredMixin, CreateView):
+    fields = ['max_item','weight','unit','created']
+    template_name = 'tracking/max_form.html'
+    success_url = reverse_lazy('tracking:tracking')
+
+    model = MaxMultipleMeasurement
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['page'] = 'max_form'
+        data['show_form'] = True
+
+        latest = MaxMultipleMeasurement.objects.filter(
+            max_record=MaxMultipleRecord.objects.get(max_user=self.request.user)
+        )
+
+        if latest and latest[0].created == date.today():
+            data['show_form'] = False
+
+        return data
+
+    def form_valid(self, form):
+        form.instance.max_record = MaxMultipleRecord.objects.get(max_user=self.request.user)
+        return super().form_valid(form)

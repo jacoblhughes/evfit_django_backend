@@ -40,33 +40,6 @@ class WeightMeasurement(models.Model):
     class Meta:
         ordering = ['-created']
 
-class RMBackSquatRecord(models.Model):
-
-    rmbacksquat_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.rmbacksquat_user.username
-
-
-class RMBackSquatMeasurement(models.Model):
-
-    rmbacksquat_record = models.ForeignKey(RMBackSquatRecord, on_delete=models.CASCADE, related_name='rmbacksquatmeasurements')
-    rmbacksquat = models.FloatField()
-    unit = models.CharField(max_length=10, default='lb')
-    # created = models.DateField(auto_now_add=True)
-    created = models.DateField()
-
-    def __str__(self):
-        return '[{}] {} {} taken on {}'.format(
-            self.rmbacksquat_record,
-            self.rmbacksquat,
-            self.unit,
-            self.created
-        )
-
-    class Meta:
-        ordering = ['-created']
 
 class HabitRecord(models.Model):
 
@@ -96,3 +69,33 @@ class HabitMeasurement(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+class MaxListItem(models.Model):
+    max_item_name = models.CharField(max_length = 225, unique=True)
+    
+    def __str__(self):
+        return self.max_item_name
+
+class MaxMultipleRecord(models.Model):
+    max_user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return '{}'.format(
+            self.max_user.username
+        )
+
+class MaxMultipleMeasurement(models.Model):
+    max_record = models.ForeignKey(MaxMultipleRecord, on_delete=models.CASCADE, related_name='maxitemmeasurements')
+    max_item = models.ForeignKey(MaxListItem, on_delete = models.CASCADE, related_name= 'max_itementered')
+    weight = models.IntegerField()
+    unit = models.CharField(max_length=10, default='lb')
+    created = models.DateField()
+
+    def __str__(self):
+        return '[{}] {} {} taken on {}'.format(
+            self.max_record,
+            self.max_item,
+            self.weight,
+            self.created
+        )

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+<div class = 'col-12'>
+<h4>Add Tracking</h4>
+</div>
+<div class = 'col-12'>
+<form method="POST" action="{% url 'tracking:max_add' %}" id="maxTrackingForm">
+	{% csrf_token %}
+	{% bootstrap_form form %}
+	<input type="submit" value="Post" class="btn btn-primary btn-large">
+</form>
+</div>
+{% endblock %}
