@@ -14,8 +14,13 @@ from habits.models import Habit
 
 class WeightRecord(models.Model):
 
-    weight_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    weight_user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
     created = models.DateField(auto_now_add=True)
+
+    @receiver(post_save,sender=User)
+    def create_weight_record(sender, instance, created, **kwargs):
+        if created:
+            WeightRecord.objects.create(weight_user=instance)
 
     def __str__(self):
         return self.weight_user.username
@@ -43,8 +48,13 @@ class WeightMeasurement(models.Model):
 
 class HabitRecord(models.Model):
 
-    habit_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    habit_user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
     created = models.DateField(auto_now_add=True)
+
+    @receiver(post_save,sender=User)
+    def create_habit_record(sender, instance, created, **kwargs):
+        if created:
+            HabitRecord.objects.create(habit_user=instance)
 
     def __str__(self):
         return self.habit_user.username
@@ -77,7 +87,7 @@ class MaxListItem(models.Model):
         return self.max_item_name
 
 class MaxMultipleRecord(models.Model):
-    max_user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    max_user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
     created = models.DateField(auto_now_add=True)
 
     @receiver(post_save,sender=User)
