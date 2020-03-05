@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class = 'container'>
+    <h4>Reach Out To EF!</h1>
+    <form method = 'POST'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type = 'submit' name = '' value ='Join!' class = 'btn btn-default'>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+Make all of the measurements unique
+    probable need to add a slug and then slugify the string or something
+
+fix front page  - per rod it sux - need call to action
+
+fix some aesthetics.
+    forum and post look
+
+profile link
+    make into small png
+
+add comment section to the personal blog

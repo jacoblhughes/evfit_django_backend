@@ -31,6 +31,17 @@ class Profile(models.Model):
     def __str__(self):
         return "{} Profile".format(self.user.username)
 
+class NewProspect(models.Model):
+
+    first_name=models.CharField(max_length=255)
+    last_name=models.CharField(max_length=255)
+    email=models.EmailField(max_length=255)
+    message=models.TextField(max_length=1024, default = 'Hello, my name is [YOUR NAME] and I am ready, willing, and able to start the journey that leads to a healther me!')
+
+    def __str__(self):
+        return "{} {} {}".format(self.first_name,self.last_name,self.email)
+
+
 
 # class DocumentProfile(models.Model):
 

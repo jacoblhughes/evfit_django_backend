@@ -21,7 +21,14 @@
     <a href="{% url 'blog:create' %}" class="btn btn-md btn-fill btn-warning"><span class="glyphicon glyphicon-plus-sign"></span> Create New Blog!</a>
 
     
-    
+    <div class='col'>
+        <h4>Newest Adds:</h4>
+        <ul class = 'list-unstyled list-group-flush'>
+        {% for p in new_prospects %}
+        <li style='color:black' class='list-group-item' >{{ p }}</li>
+        {% endfor %}
+        </ul>
+    </div>
     
     {% endif %}
     </div>

@@ -15,3 +15,8 @@ class SignUp(CreateView):
 
 class ProfileView(TemplateView):
     template_name = 'accounts/profile.html'
+
+class NewProspect(CreateView):
+    form_class=forms.NewProspectForm
+    template_name='accounts/new_prospect.html'
+    success_url = reverse_lazy('home')

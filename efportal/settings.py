@@ -80,6 +80,7 @@ TEMPLATES = [
                 'habits.context_processor.user_habits_context',
                 'habits.context_processor.all_habits_context',
                 'accounts.context_processor.profile_information',
+                'accounts.context_processor.new_prospects',
             ],
         },
     },
