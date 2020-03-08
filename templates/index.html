@@ -8,6 +8,7 @@
 
         {% if user.is_authenticated %}
         <h1>Welcome to Evident Fitness, {{user.first_name}}! </h1>
+        <p><a href="{% url 'accounts:profile'  %}">View your profile here.<a></p>
         {% else %}
         <h1>Welcome to Evident Fitness!</h1>
         {% endif %}

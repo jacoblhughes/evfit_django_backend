@@ -80,7 +80,6 @@ TEMPLATES = [
                 'habits.context_processor.user_habits_context',
                 'habits.context_processor.all_habits_context',
                 'accounts.context_processor.profile_information',
-                'accounts.context_processor.new_prospects',
             ],
         },
     },
@@ -158,3 +157,10 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+#DataFlair
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'server237.web-hosting.com'
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'jacob@evidentfitness.com'
+EMAIL_HOST_PASSWORD = 'y5Qm|~11J2=eU$:U'

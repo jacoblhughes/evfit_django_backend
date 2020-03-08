@@ -14,7 +14,14 @@ class UserCreateForm(UserCreationForm):
         self.fields['email'].label = 'Email Address'
     
 
-class NewProspectForm(forms.ModelForm):
-    class Meta:
-        model = models.NewProspect
-        fields=['first_name','last_name','email','message']
+class NewProspectForm(forms.Form):
+    first_name=forms.CharField(max_length=255)
+    last_name=forms.CharField(max_length=255)
+    email=forms.EmailField(max_length=255)
+    message=forms.CharField(max_length=1024, widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['message'].label = 'Message (Use the below message or create your own!)'
+        self.fields['message'].initial = 'Hello, my name is [YOUR NAME] and I am ready, willing, and able to start the journey that leads to a healthier me!'
+        self.fields['email'].label = 'Email Address'
