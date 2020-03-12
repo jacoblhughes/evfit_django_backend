@@ -162,5 +162,5 @@ django_heroku.settings(locals())
 EMAIL_HOST = 'server237.web-hosting.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'jacob@evidentfitness.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = os.environ.get('EF_USER_EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('EF_USER_PASS')
