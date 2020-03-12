@@ -163,4 +163,4 @@ EMAIL_HOST = 'server237.web-hosting.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'jacob@evidentfitness.com'
-EMAIL_HOST_PASSWORD = 'y5Qm|~11J2=eU$:U'
+EMAIL_HOST_PASSWORD = ''
