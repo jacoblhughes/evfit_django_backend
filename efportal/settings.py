@@ -27,7 +27,7 @@ SECRET_KEY = '8k_pv*w4()ld72f5nz1b(ph&s4lv2uuc*wlflvh1)b@_-nw7qe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1','jacoblhughes.com','evidentfitness.com','jacoblhughes.com/evfitportal']
+ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1','evidentfitness.com']
 
 
 # Application definition
