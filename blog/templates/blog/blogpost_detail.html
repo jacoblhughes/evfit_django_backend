@@ -3,18 +3,18 @@
 
 {% block blogpost_content %}
 <div class='row'>
-	<div class = 'col-12 blog_detail_title' >
-	<h1><strong>{{blogpost.title}}</strong></h1>
+	<div class='col-12 blog_detail_title'>
+		<h1><strong>{{blogpost.title}}</strong></h1>
 	</div>
 </div>
-	<div class='row blog_detail_author'>
-	<div class = 'col-12'>
-	<p><sub>By: {{blogpost.author}}</sub></p>
+<div class='row blog_detail_author'>
+	<div class='col-12'>
+		<p><sub>By: {{blogpost.author}}</sub></p>
 	</div>
+</div>
+<div class='row blog_detail_content'>
+	<div class='col-12 blog_detail_body'>
+		<p>{{blogpost.content|safe}}</p>
 	</div>
-	<div class = 'row blog_detail_content'>
-	<div class = 'col-12 blog_detail_body'>
-	<p>{{blogpost.content}}</p>
-	</div>
-	</div>
+</div>
 {% endblock %}
