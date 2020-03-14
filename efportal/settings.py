@@ -27,7 +27,7 @@ SECRET_KEY = '8k_pv*w4()ld72f5nz1b(ph&s4lv2uuc*wlflvh1)b@_-nw7qe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1',]
+ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1','jacoblhughes.com','evidentfitness.com','jacoblhughes.com/evfitportal']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'comments',
     'taggit',
     'tracking',
+    'rest_framework',
 
 ]
 
@@ -164,3 +165,11 @@ EMAIL_USE_SSL = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.environ.get('EF_USER_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('EF_USER_PASS')
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
