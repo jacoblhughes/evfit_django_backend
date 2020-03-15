@@ -37,6 +37,6 @@ class NewProspect(FormView):
             'New Client Reach Out!',
             message,
             'jacob@evidentfitness.com',
-            ['jacob@evidentfitness.com'],
+            ['hughes.jacobl@gmail.com'],
         )
         return HttpResponseRedirect(reverse('home'))
