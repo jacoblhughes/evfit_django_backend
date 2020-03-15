@@ -164,7 +164,7 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.privateemail.com'
 EMAIL_HOST_USER = os.environ.get('EF_USER_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('EF_USER_PASS')
-EMAIL_PORT = 25
+EMAIL_PORT = 465
 
 
 REST_FRAMEWORK = {
