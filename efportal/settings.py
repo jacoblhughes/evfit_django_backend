@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'accounts.apps.SendemailConfig',
 ]
 
 ROOT_URLCONF = 'efportal.urls'
@@ -155,16 +155,22 @@ LOGOUT_REDIRECT_URL = 'thanks'
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+
 
 #DataFlair
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = 'jacob@evidentfitness.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EF_EMAIL_PASS')
+DEFAULT_FROM_EMAIL = 'jacob@evidentfitness.com'
+SERVER_EMAIL = 'jacob@evidentfitness.com'
+EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.privateemail.com'
-EMAIL_HOST_USER = os.environ.get('EF_USER_EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('EF_USER_PASS')
 EMAIL_PORT = 465
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
 
 
 REST_FRAMEWORK = {
