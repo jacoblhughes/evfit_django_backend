@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,9 @@ SECRET_KEY = '8k_pv*w4()ld72f5nz1b(ph&s4lv2uuc*wlflvh1)b@_-nw7qe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1','evidentfitness.com']
+ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -180,3 +183,25 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': './debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
