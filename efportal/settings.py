@@ -172,9 +172,6 @@ EMAIL_PORT = 465
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
-
-
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -182,6 +179,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
 LOGGING = {
     'version': 1,
@@ -201,6 +201,3 @@ LOGGING = {
         },
     },
 }
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
