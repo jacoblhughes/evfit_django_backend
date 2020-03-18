@@ -22,12 +22,14 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = os.environ.get('EF_SECRET_KEY')
 SECRET_KEY = '8k_pv*w4()ld72f5nz1b(ph&s4lv2uuc*wlflvh1)b@_-nw7qe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1','evidentfitness.com']
+ADMINS = [('Jacob','hughes.jacobl@gmail.com'),]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -124,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'PST'
 
 USE_I18N = True
 
@@ -162,9 +164,10 @@ django_heroku.settings(locals())
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.privateemail.com'
-EMAIL_HOST_USER = os.environ.get('EF_USER_EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('EF_USER_PASS')
+EMAIL_HOST_USER = os.environ.get('EF_EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EF_EMAIL_PASS')
 EMAIL_PORT = 465
+SERVER_EMAIL = 'hughes.jacobl@gmai.com'
 
 
 REST_FRAMEWORK = {
@@ -173,4 +176,23 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
 }
