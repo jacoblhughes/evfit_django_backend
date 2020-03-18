@@ -22,7 +22,7 @@ class SignUp(CreateView):
 class ProfileView(TemplateView):
     template_name = 'accounts/profile.html'
 
-class NewProspect(FormView):
+class NewProspectView(FormView):
     form_class=forms.NewProspectForm
     template_name='accounts/new_prospect.html'
     success_url = reverse_lazy('home')
@@ -37,6 +37,10 @@ class NewProspect(FormView):
             'New Client Reach Out!',
             message,
             'jacob@evidentfitness.com',
-            ['jacob@evidentfitness.com','hughes.jacobl@gmail.com'],
+            ['jacob@evidentfitness.com',],
+            fail_silently=False,
         )
+        # msg = EmailMessage('New Client Reach Out','Message 1010101010101','jacob@evidentfitness.com',['jacob@evidentfitness.com',])
+        # msg.send()
+        # print(msg.send())
         return HttpResponseRedirect(reverse('home'))

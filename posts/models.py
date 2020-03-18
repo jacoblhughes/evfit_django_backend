@@ -2,7 +2,6 @@ from django.conf import settings
 from django.urls import reverse
 from django.db import models
 
-import misaka
 
 from habits.models import Habit
 
@@ -21,7 +20,7 @@ class Post(models.Model):
         return self.message
 
     def save(self, *args, **kwargs):
-        self.message_html = misaka.html(self.message)
+        #self.message_html = misaka.html(self.message)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

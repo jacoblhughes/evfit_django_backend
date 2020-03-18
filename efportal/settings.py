@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,14 +21,12 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('EF_SECRET_KEY')
 SECRET_KEY = '8k_pv*w4()ld72f5nz1b(ph&s4lv2uuc*wlflvh1)b@_-nw7qe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ADMINS = [('Jacob','hughes.jacobl@gmail.com'),]
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['evfitportal.herokuapp.com','evidentfitness.com','127.0.0.1','evidentfitness.com']
 
 
 # Application definition
@@ -64,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'accounts.apps.SendemailConfig',
 ]
 
 ROOT_URLCONF = 'efportal.urls'
@@ -126,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'PST'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -157,17 +155,22 @@ LOGOUT_REDIRECT_URL = 'thanks'
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+
 
 #DataFlair
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = 'jacob@evidentfitness.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EF_EMAIL_PASS')
+DEFAULT_FROM_EMAIL = 'jacob@evidentfitness.com'
+SERVER_EMAIL = 'jacob@evidentfitness.com'
+EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.privateemail.com'
-EMAIL_HOST_USER = os.environ.get('EF_EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EF_EMAIL_PASS')
 EMAIL_PORT = 465
-SERVER_EMAIL = 'hughes.jacobl@gmai.com'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
 
 
 REST_FRAMEWORK = {
@@ -176,23 +179,4 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
 }

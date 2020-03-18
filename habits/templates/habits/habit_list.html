@@ -27,7 +27,7 @@
 		  <a class="list-habit-item" href="{% url 'habits:single' slug=habit.slug %}">
 			     <h3 class="title list-habit-item-heading">{{ habit.name }}</h3></a>
 			<div class="list-habit-item-text container-fluid">
-				{{ habit.description_html|safe }}
+				{{ habit.description|safe }}
 				<div class="row">
 					<div class="col-md-4">
 						<span class="badge">{{ habit.members.count }}</span> member{{ habit.members.count|pluralize }}
