@@ -21,7 +21,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8k_pv*w4()ld72f5nz1b(ph&s4lv2uuc*wlflvh1)b@_-nw7qe'
+SECRET_KEY = os.environ['EF_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -161,12 +161,12 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 #DataFlair
 EMAIL_HOST_USER = 'jacob@evidentfitness.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EF_EMAIL_PASS')
+EMAIL_HOST_PASSWORD = os.environ.get('EF_SENDGRID_PASS')
 DEFAULT_FROM_EMAIL = 'jacob@evidentfitness.com'
 SERVER_EMAIL = 'jacob@evidentfitness.com'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST = 'mail.privateemail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 465
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
