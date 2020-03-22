@@ -160,7 +160,7 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 
 #DataFlair
-EMAIL_HOST_USER = 'jacob@evidentfitness.com'
+EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = os.environ.get('EF_SENDGRID_PASS')
 DEFAULT_FROM_EMAIL = 'jacob@evidentfitness.com'
 SERVER_EMAIL = 'jacob@evidentfitness.com'
