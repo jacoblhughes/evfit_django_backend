@@ -28,7 +28,7 @@ DEBUG = False
 
 ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*.evidentfitness.com','evidentfitness.com','127.0.0.1:8000','evidentfitness.herokuapp.com']
 
 
 # Application definition
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -168,6 +169,8 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 465
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
