@@ -4,4 +4,4 @@ from . import models
 class EFUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.EFUser
-        fields = ('id','first_name')
+        fields = ('id','first_name','last_name')
