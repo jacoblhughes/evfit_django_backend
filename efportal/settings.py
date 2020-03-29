@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import django_heroku
 import os
+from raygun4py import raygunprovider
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'accounts.apps.SendemailConfig',
+    'raygun4py.middleware.django.Provider',
 ]
 
 ROOT_URLCONF = 'efportal.urls'
@@ -206,3 +208,9 @@ LOGGING = {
         },
     },
 }
+
+RAYGUN4PY_CONFIG = {
+    'api_key': 'oaKrpQcAtPDW8FfHcChMaQ'
+}
+
+client = raygunprovider.RaygunSender('oaKrpQcAtPDW8FfHcChMaQ')
