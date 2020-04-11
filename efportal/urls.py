@@ -19,7 +19,8 @@ from django.urls import include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .api import router
+from .router import router
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,7 +34,8 @@ urlpatterns = [
     path('posts/', include('posts.urls', namespace ='posts')),
     path('efadmin/', views.EFAdminPage.as_view(), name = 'efadmin'),
     path('tracking/', include('tracking.urls', namespace ='tracking')),
-
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('rest-auth/', include('rest_auth.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

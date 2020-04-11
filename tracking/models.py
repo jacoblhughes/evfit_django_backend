@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from habits.models import Habit
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -33,6 +34,12 @@ class WeightMeasurement(models.Model):
     unit = models.CharField(max_length=10, default='lb')
     # created = models.DateField(auto_now_add=True)
     created = models.DateField()
+    slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        created_slug = str(self.weight_record) +'-'+ str(self.weight) +'-'+ str(self.created)
+        self.slug = slugify(created_slug)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return '[{}] {} {} taken on {}'.format(
@@ -68,6 +75,12 @@ class HabitMeasurement(models.Model):
     REPLY_CHOICES = (("Yes","Yes"),("No","No"))
     reply = models.CharField(max_length = 10, choices=REPLY_CHOICES, default = 1)
     created = models.DateField()
+    slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        created_slug = str(self.habit_record) +'-'+ str(self.habit) +'-'+ str(self.created)
+        self.slug = slugify(created_slug)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return '[{}] {} {} taken on {}'.format(
@@ -106,6 +119,12 @@ class MaxMultipleMeasurement(models.Model):
     weight = models.IntegerField()
     unit = models.CharField(max_length=10, default='lb')
     created = models.DateField()
+    slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        created_slug = str(self.max_record) +''+ str(self.max_item)+''+ str(self.weight) +''+ str(self.created)
+        self.slug = slugify(created_slug)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return '[{}] {} {} taken on {}'.format(

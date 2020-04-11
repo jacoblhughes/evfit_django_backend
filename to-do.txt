@@ -11,4 +11,4 @@ profile link
 
 add comment section to the personal blog
 
-https
+return the strings on the list of the react app

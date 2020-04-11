@@ -11,7 +11,18 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import django_heroku
 import os
-from raygun4py import raygunprovider
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://e68adab248484e69b024e28d6980b456@sentry.io/5191069",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +40,7 @@ DEBUG = False
 
 ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
 
-ALLOWED_HOSTS = ['*.evidentfitness.com','evidentfitness.com','127.0.0.1:8000','evidentfitness.herokuapp.com',]
+ALLOWED_HOSTS = ['*.evidentfitness.com','evidentfitness.com','127.0.0.1','evidentfitness.herokuapp.com']
 
 
 # Application definition
@@ -51,22 +62,24 @@ INSTALLED_APPS = [
     'comments',
     'taggit',
     'tracking',
+    'corsheaders',
+    'rest_auth',
     'rest_framework',
+    'rest_framework.authtoken',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'accounts.apps.SendemailConfig',
-    'raygun4py.middleware.django.Provider',
 ]
 
 ROOT_URLCONF = 'efportal.urls'
@@ -171,8 +184,8 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 465
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -180,11 +193,18 @@ SECURE_SSL_REDIRECT = True
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'FORM_METHOD_OVERRIDE': None,
+    'FORM_CONTENT_OVERRIDE': None,
+    'FORM_CONTENTTYPE_OVERRIDE': None
+    # 'PAGE_SIZE': 10,
+
 }
 
 # Activate Django-Heroku.
@@ -199,6 +219,11 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': 'debug.log',
         },
+        'file1': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'myLogger.log',
+        },
     },
     'loggers': {
         'django': {
@@ -206,11 +231,52 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'myLogger': {
+            'handlers': ['file1'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
 
-RAYGUN4PY_CONFIG = {
-    'api_key': 'oaKrpQcAtPDW8FfHcChMaQ'
-}
 
-client = raygunprovider.RaygunSender('oaKrpQcAtPDW8FfHcChMaQ')
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+# CORS_ORIGIN_WHITELIST = [
+#     "https://evidentfitness.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:8000",
+#     "http://localhost:3000",
+#     "exp://192.168.0.8:19000",
+#     "exp://127.0.0.1:19000",
+# ]
+
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+CSRF_COOKIE_NAME = "csrftoken"
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
