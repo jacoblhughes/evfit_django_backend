@@ -31,7 +31,7 @@ class Profile(models.Model):
     def __str__(self):
         return "{} Profile".format(self.user.username)
 
-
+# WOWOWOW
 # class DocumentProfile(models.Model):
 
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, unique = True)
