@@ -10,3 +10,4 @@ class EFHabitMeasViewset(viewsets.ModelViewSet):
         return models.HabitMeasurement.objects.filter(habit_record=models.HabitRecord.objects.get(habit_user=self.request.user)).order_by('-created')
     # queryset = models.HabitMeasurement.objects.all()
     serializer_class = serializers.EFHabitMeasSerializer
+    permission_classes = (permissions.IsAuthenticated,)
