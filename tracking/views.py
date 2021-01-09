@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView, FormView
+from django.views.generic import CreateView, TemplateView, UpdateView
 from django.views.generic.list import ListView
 from django.views import View
 from .models import WeightMeasurement, WeightRecord, HabitRecord, HabitMeasurement, MaxListItem, MaxMultipleRecord, MaxMultipleMeasurement
@@ -21,6 +21,7 @@ from plotly.offline import plot
 from plotly.graph_objs import Scatter
 
 from . import forms
+
 
 
 class TrackingHome(TemplateView):
@@ -73,13 +74,13 @@ class WeightTableView(LoginRequiredMixin, ListView):
         return data
 
 
-class AddWeightView(LoginRequiredMixin, FormView):
+class AddWeightView(LoginRequiredMixin, CreateView):
 
     fields = ['weight', 'created']
     template_name = 'tracking/weight_form.html'
     success_url = reverse_lazy('tracking:tracking')
-    # model = WeightMeasurement
-    form_class = forms.WeightMeasurementForm
+    model = WeightMeasurement
+    # form_class = forms.WeightMeasurementForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -94,6 +95,12 @@ class AddWeightView(LoginRequiredMixin, FormView):
             data['show_form'] = False
 
         return data
+    def get_form(self):
+        '''add date picker in forms'''
+        from django.forms.widgets import SelectDateWidget
+        form = super(AddWeightView, self).get_form()
+        form.fields['created'].widget = SelectDateWidget()
+        return form
 
     def form_valid(self, form):
         form.instance.weight_record = WeightRecord.objects.get(weight_user=self.request.user)
@@ -159,13 +166,13 @@ class HabitTableView(LoginRequiredMixin, ListView):
 
         return data
 
-class AddHabitView(LoginRequiredMixin, FormView):
+class AddHabitView(LoginRequiredMixin, CreateView):
     fields = ['habit','reply','created']
     template_name = 'tracking/habit_form.html'
     success_url = reverse_lazy('tracking:tracking')
 
-    # model = HabitMeasurement
-    form_class = forms.HabitMeasurementForm
+    model = HabitMeasurement
+    # form_class = forms.HabitMeasurementForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -180,6 +187,13 @@ class AddHabitView(LoginRequiredMixin, FormView):
             data['show_form'] = False
 
         return data
+
+    def get_form(self):
+        '''add date picker in forms'''
+        from django.forms.widgets import SelectDateWidget
+        form = super(AddHabitView, self).get_form()
+        form.fields['created'].widget = SelectDateWidget()
+        return form
 
     def form_valid(self, form):
         form.instance.habit_record = HabitRecord.objects.get(habit_user=self.request.user)
@@ -240,13 +254,13 @@ class MaxTableView(LoginRequiredMixin, ListView):
 
         return data
 
-class AddMaxMultipleView(LoginRequiredMixin, FormView):
+class AddMaxMultipleView(LoginRequiredMixin, CreateView):
     fields = ['max_item','weight','created']
     template_name = 'tracking/max_form.html'
     success_url = reverse_lazy('tracking:tracking')
 
-    # model = MaxMultipleMeasurement
-    form_class = forms.MaxMultipleMeasurementForm
+    model = MaxMultipleMeasurement
+    # form_class = forms.MaxMultipleMeasurementForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -261,6 +275,13 @@ class AddMaxMultipleView(LoginRequiredMixin, FormView):
             data['show_form'] = False
 
         return data
+
+    def get_form(self):
+        '''add date picker in forms'''
+        from django.forms.widgets import SelectDateWidget
+        form = super(AddMaxMultipleView, self).get_form()
+        form.fields['created'].widget = SelectDateWidget()
+        return form
 
     def form_valid(self, form):
         form.instance.max_record = MaxMultipleRecord.objects.get(max_user=self.request.user)

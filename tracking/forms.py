@@ -24,11 +24,11 @@ class WeightMeasurementForm(forms.ModelForm):
             'created': DateInput(format = '%Y/%m/%d')
         }
 
-class HabitMeasurementForm(forms.ModelForm):
+# class HabitMeasurementForm(forms.ModelForm):
 
-    class Meta:
-        model = models.HabitMeasurement
-        fields = ("habit","reply","created")
-        widgets = {
-            'created': DateInput(format = '%Y/%m/%d')
-        }
+#     class Meta:
+#         model = models.HabitMeasurement
+#         fields = ("habit","reply","created")
+#         widgets = {
+#             'created': DateInput(format = '%Y/%m/%d')
+#         }
