@@ -33,7 +33,7 @@ class WeightMeasurement(models.Model):
     weight = models.FloatField()
     unit = models.CharField(max_length=10, default='lb')
     # created = models.DateField(auto_now_add=True)
-    created = models.DateField()
+    created = models.DateTimeField()
     slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -74,7 +74,7 @@ class HabitMeasurement(models.Model):
     
     REPLY_CHOICES = (("Yes","Yes"),("No","No"))
     reply = models.CharField(max_length = 10, choices=REPLY_CHOICES, default = 1)
-    created = models.DateField()
+    created = models.DateTimeField()
     slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -118,7 +118,10 @@ class MaxMultipleMeasurement(models.Model):
     max_item = models.ForeignKey(MaxListItem, on_delete = models.CASCADE, related_name= 'max_itementered')
     weight = models.IntegerField()
     unit = models.CharField(max_length=10, default='lb')
-    created = models.DateField()
+    created = models.DateTimeField(widget=forms.TextInput(attrs=
+                                {
+                                    'class':'datepicker'
+                                }))
     slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
