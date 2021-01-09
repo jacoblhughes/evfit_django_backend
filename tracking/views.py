@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, FormView
 from django.views.generic.list import ListView
 from django.views import View
 from .models import WeightMeasurement, WeightRecord, HabitRecord, HabitMeasurement, MaxListItem, MaxMultipleRecord, MaxMultipleMeasurement
@@ -19,6 +19,8 @@ from braces.views import SelectRelatedMixin
 
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
+
+from . import forms
 
 
 class TrackingHome(TemplateView):
@@ -71,11 +73,13 @@ class WeightTableView(LoginRequiredMixin, ListView):
         return data
 
 
-class AddWeightView(LoginRequiredMixin, CreateView):
-    model = WeightMeasurement
+class AddWeightView(LoginRequiredMixin, FormView):
+
     fields = ['weight', 'created']
     template_name = 'tracking/weight_form.html'
     success_url = reverse_lazy('tracking:tracking')
+    # model = WeightMeasurement
+    form_class = forms.WeightMeasurementForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -155,12 +159,13 @@ class HabitTableView(LoginRequiredMixin, ListView):
 
         return data
 
-class AddHabitView(LoginRequiredMixin, CreateView):
+class AddHabitView(LoginRequiredMixin, FormView):
     fields = ['habit','reply','created']
     template_name = 'tracking/habit_form.html'
     success_url = reverse_lazy('tracking:tracking')
 
-    model = HabitMeasurement
+    # model = HabitMeasurement
+    form_class = forms.HabitMeasurementForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -235,12 +240,13 @@ class MaxTableView(LoginRequiredMixin, ListView):
 
         return data
 
-class AddMaxMultipleView(LoginRequiredMixin, CreateView):
+class AddMaxMultipleView(LoginRequiredMixin, FormView):
     fields = ['max_item','weight','created']
     template_name = 'tracking/max_form.html'
     success_url = reverse_lazy('tracking:tracking')
 
-    model = MaxMultipleMeasurement
+    # model = MaxMultipleMeasurement
+    form_class = forms.MaxMultipleMeasurementForm
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
