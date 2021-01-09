@@ -118,10 +118,7 @@ class MaxMultipleMeasurement(models.Model):
     max_item = models.ForeignKey(MaxListItem, on_delete = models.CASCADE, related_name= 'max_itementered')
     weight = models.IntegerField()
     unit = models.CharField(max_length=10, default='lb')
-    created = models.DateTimeField(widget=forms.TextInput(attrs=
-                                {
-                                    'class':'datepicker'
-                                }))
+    created = models.DateTimeField(widget=forms.DateTimeInput(format="%Y/%m/%d"))
     slug = models.SlugField(max_length=200, allow_unicode=True, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
