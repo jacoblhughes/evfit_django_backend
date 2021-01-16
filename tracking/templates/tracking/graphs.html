@@ -33,7 +33,6 @@
 
 
     d3.json("{% url "tracking:habit_data" %}").then(function (data) {
-        console.log(data)
         const habitcount = data['count']
         const habitobjects = data['habits']
         const dataset = data[username]['habitmeasurements'];
@@ -96,7 +95,6 @@
         });
 
     d3.json("{% url "tracking:weight_data" %}").then(function (data) {
-            console.log(data)
 
             const dataset = data[username]['weightmeasurements'];
 
@@ -161,7 +159,6 @@
 
 
     d3.json("{% url "tracking:max_data" %}").then(function (data) {
-            console.log(data)
 
         const dataset = data[username]['maxitemmeasurements'];
 

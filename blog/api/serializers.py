@@ -6,4 +6,4 @@ class EFBlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.BlogPost
-        fields = ('id','title')
+        fields = ('id','title','content','created_on')
