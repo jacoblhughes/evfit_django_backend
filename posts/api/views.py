@@ -6,6 +6,6 @@ from rest_framework import authentication
 
 class EFPostViewset(viewsets.ModelViewSet):
 
-    queryset = models.Post.objects.all().order_by('-created_on')
+    queryset = models.Post.objects.all().order_by('-created_at')
     serializer_class = serializers.EFPostSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
