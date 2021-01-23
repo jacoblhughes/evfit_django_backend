@@ -7,7 +7,7 @@ app_name = 'habits'
 urlpatterns = [
     path("", views.ListHabits.as_view(), name="all"),
     path("new/", views.CreateHabit.as_view(), name="create"),
-    path("posts/in/<slug>/",views.SingleHabit.as_view(),name="single"),
+    path("habitposts/in/<slug>/",views.SingleHabit.as_view(),name="single"),
     path("join/<slug>/",views.JoinHabit.as_view(),name="join"),
     path("leave/<slug>/",views.LeaveHabit.as_view(),name="leave"),
 ]

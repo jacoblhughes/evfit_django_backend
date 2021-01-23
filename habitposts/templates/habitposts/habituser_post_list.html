@@ -1,0 +1,17 @@
+{% extends "habitposts/habitpost_base.html" %}
+
+{% block pre_post %}
+<div class="col-12">
+	<h5>Post History</h5>
+	<h3>@{{ habitpost_user.username }}</h3>
+
+</div>
+{% endblock %}
+
+{% block post_content %}
+{% for habitpost in habitpost_list %}
+<div class='col-12'>
+	{% include "habitposts/_habitpost.html" %}
+</div>
+{% endfor %}
+{% endblock %}
