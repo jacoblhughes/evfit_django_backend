@@ -10,4 +10,4 @@ class EFHabitMeasViewset(viewsets.ModelViewSet):
         return models.HabitMeasurement.objects.order_by('-created')
     # queryset = models.HabitMeasurement.objects.all()
     serializer_class = serializers.EFHabitMeasSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
