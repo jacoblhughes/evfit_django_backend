@@ -4,13 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
-# Create your models here.
-
-# def upload_path_documentprofile(instance, filename):
-#     return 'efportal/user_programs/{0}/{1}'.format(user.username, filename)
-
-
 class EFUser(auth.models.User, auth.models.PermissionsMixin):
 
     def __str__(self):
@@ -30,17 +23,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return "{} Profile".format(self.user.username)
-
-# WOWOWOW
-# class DocumentProfile(models.Model):
-
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, unique = True)
-#     program = models.FileField(upload_to = 'efportal/user_programs/', blank = True, default = "efportal/user_programs/welcome.xlsx")
-
-#     @receiver(post_save, sender = User)
-#     def create_user_program(sender, instance, created, **kwargs):
-#         if created:
-#             DocumentProfile.objects.create(user=instance)
-    
-#     def __str__(self):
-#         return "{} Document Profile".format(self.user.username)

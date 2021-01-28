@@ -3,5 +3,3 @@ from . import models
 # Register your models here.
 
 admin.site.register(models.Profile)
-# admin.site.register(models.NewProspect)
-# admin.site.register(models.DocumentProfile)

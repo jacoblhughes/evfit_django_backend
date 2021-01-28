@@ -8,7 +8,6 @@ class ProfileViewset(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         return models.Profile.objects.filter(user=self.request.user)
-    # queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
     permission_classes = (permissions.IsAuthenticated,)
     
