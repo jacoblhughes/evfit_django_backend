@@ -16,7 +16,7 @@ from django import forms
 
 class WeightRecord(models.Model):
 
-    weight_user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    weight_user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     created = models.DateField(auto_now_add=True)
 
     @receiver(post_save,sender=User)
@@ -56,7 +56,7 @@ class WeightMeasurement(models.Model):
 
 class HabitRecord(models.Model):
 
-    habit_user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    habit_user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     created = models.DateField(auto_now_add=True)
 
     @receiver(post_save,sender=User)
@@ -101,7 +101,7 @@ class MaxListItem(models.Model):
         return self.max_item_name
 
 class MaxMultipleRecord(models.Model):
-    max_user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    max_user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     created = models.DateField(auto_now_add=True)
 
     @receiver(post_save,sender=User)
