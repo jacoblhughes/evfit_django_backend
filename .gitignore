@@ -4,6 +4,8 @@
 *.pyc
 *.key
 
+./debug.log
+
 __pycache__
 db.sqlite3
 media
