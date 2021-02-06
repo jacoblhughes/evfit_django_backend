@@ -36,7 +36,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = os.environ['EF_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
 
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'bootstrap4',
-    'accounts',
+    'profiles',
     'blog',
     'habits',
     'habitposts',
@@ -98,7 +98,7 @@ TEMPLATES = [
                 'blog.context_processor.recent_five',
                 'habits.context_processor.user_habits_context',
                 'habits.context_processor.all_habits_context',
-                'accounts.context_processor.profile_information',
+                'profiles.context_processor.profile_information',
             ],
         },
     },
@@ -177,13 +177,13 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 #DataFlair
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('EF_SENDGRID_PASS')
+EMAIL_HOST_PASSWORD = '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'
 DEFAULT_FROM_EMAIL = 'jacob@evidentfitness.com'
 SERVER_EMAIL = 'jacob@evidentfitness.com'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # SECURE_SSL_REDIRECT = True
 

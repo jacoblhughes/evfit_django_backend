@@ -42,7 +42,7 @@
 
                     {% if user.is_authenticated %}
                     <li class='nav-item '><a class="nav-link img-link"
-                            href="{% url 'accounts:profile'  %}">Profile</a></li>
+                            href="{% url 'profiles:profile'  %}">Profile</a></li>
                     {% endif %}
                     <li class='nav-item'><a class="nav-link btn btn-simple" href="{% url 'home' %}"
                             class="btn btn-simple">Home</a></li>
@@ -59,7 +59,7 @@
                     <li class='nav-item'><a class="nav-link btn btn-simple"
                             href="{% url 'tracking:tracking' %}">Tracking</a></li>
                     {% else %}
-                    <li class='nav-item active'><a class="nav-link btn btn-simple" href="{% url 'accounts:login' %}">Log
+                    <li class='nav-item active'><a class="nav-link btn btn-simple" href="{% url 'login' %}">Log
                             in</a>
                     </li>
 
@@ -69,7 +69,7 @@
                     {% if user.is_authenticated %}
 
                     <li class='nav-item active'><a class="nav-link btn btn-simple"
-                            href="{% url 'accounts:logout' %}">Log
+                            href="{% url 'logout' %}">Log
                             out</a></li>
                     {% endif %}
 

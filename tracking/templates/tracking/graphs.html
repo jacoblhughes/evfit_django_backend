@@ -50,11 +50,16 @@
         const latest_entry_minus = latest_entry.setDate(latest_entry.getDate() - 19)
 
         var x = d3.scaleTime()
-            .domain([new Date(latest_entry_minus), new Date(latest_entry_plus)])
+            .domain([latest_entry_minus, latest_entry_plus])
             .range([0, width ]);
+
+        var xAxis = d3.axisBottom(x)
+            .ticks(5)
+            .tickFormat(d3.timeFormat("%b %d"))
+
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(xAxis);
 
         var y = d3.scaleLinear()
             .domain([0, habitcount])
@@ -107,13 +112,22 @@
             
             const latest_entry = d3.max(dataset.map(function(d) {return new Date(d.created)}))
             const latest_entry_plus = latest_entry.setDate(latest_entry.getDate() + 10)
+            const first_entry = d3.min(dataset.map(function(d) {return new Date(d.created)}))
+            const first_entry_minus = first_entry.setDate(first_entry.getDate() - 10)
+
             // Add X axis
             var x = d3.scaleTime()
-                .domain([date_user_joined, latest_entry_plus])
+                .domain([first_entry, latest_entry_plus])
                 .range([ 0, width ]);
+
+        var xAxis = d3.axisBottom(x)
+            .ticks(5)
+            .tickFormat(d3.timeFormat("%b %d"))
+
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+                .call(xAxis)
+
 
             const biggest_entry = d3.max(dataset.map(function(d) {return d.weight}))
             const biggest_entry_plus = biggest_entry + 30
@@ -174,13 +188,20 @@
 
         const latest_entry = d3.max(maxItemArray.map(function(d) {return new Date(d.created)}))
         const latest_entry_plus = latest_entry.setDate(latest_entry.getDate() + 10)
+        const first_entry = d3.min(maxItemArray.map(function(d) {return new Date(d.created)}))
+        const first_entry_minus = first_entry.setDate(first_entry.getDate() - 10)
 
         var x = d3.scaleTime()
-            .domain([date_user_joined, latest_entry_plus])
-            .range([ 0, width ]);
+            .domain([first_entry_minus, latest_entry_plus])
+            .range([ 0, width ])
+        
+        var xAxis = d3.axisBottom(x)
+            .ticks(5)
+            .tickFormat(d3.timeFormat("%b %d"))
+
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(xAxis);
 
         const biggest_entry = d3.max(maxItemArray.map(function(d) {return d.weight}))
         const biggest_entry_plus = biggest_entry + 50

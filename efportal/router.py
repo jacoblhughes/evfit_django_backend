@@ -1,5 +1,5 @@
 from rest_framework import routers
-from accounts.api.views import ProfileViewset
+from profiles.api.views import ProfileViewset
 from tracking.api.views import EFHabitMeasViewset
 from blog.api.views import EFBlogViewset
 from habitposts.api.views import EFPostViewset

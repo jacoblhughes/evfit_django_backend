@@ -27,7 +27,7 @@ urlpatterns = [
     path('', views.HomePage.as_view(), name = 'home'),
     path('about/', views.AboutPage.as_view(), name = 'about'),
     path('contact/', views.ContactPage.as_view(), name = 'contact'),
-    path('accounts/', include('accounts.urls', namespace ='accounts')),
+    path('profiles/', include('profiles.urls', namespace ='profiles')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('thanks/', views.ThanksPage.as_view(), name = 'thanks'),
     path('habits/', include('habits.urls', namespace ='habits')),
@@ -37,5 +37,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

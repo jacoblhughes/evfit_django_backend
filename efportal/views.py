@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from accounts.models import User
+from profiles.models import User
 from blog.models import BlogPost
 from django.urls import reverse
 
@@ -43,3 +43,4 @@ class EFAdminPage(TemplateView):
 # class RecentPostList(SelectRelatedMixin, generic.ListView):
 #     template_name = 'recent_post_list.html'
 #     select_related = ('author',)
+

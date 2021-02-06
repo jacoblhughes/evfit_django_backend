@@ -1,4 +1,4 @@
-from accounts.models import Profile
+from profiles.models import Profile
 
 def profile_information(request):
     context = Profile.objects.all()

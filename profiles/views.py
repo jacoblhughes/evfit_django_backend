@@ -10,21 +10,17 @@ from django.template.loader import get_template
 from django.http import HttpResponseRedirect, HttpResponse
 
 from . import forms
+from .forms import UserCreateForm
 
 
 # Create your views here.
 
-class SignUp(CreateView):
-    form_class = forms.UserCreateForm
-    success_url = reverse_lazy('accounts:login')
-    template_name = 'accounts/signup.html'
-
 class ProfileView(TemplateView):
-    template_name = 'accounts/profile.html'
+    template_name = 'profiles/profile.html'
 
 class NewProspectView(FormView):
     form_class=forms.NewProspectForm
-    template_name='accounts/new_prospect.html'
+    template_name='profiles/new_prospect.html'
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
@@ -44,3 +40,8 @@ class NewProspectView(FormView):
         # msg.send()
         # print(msg.send())
         return HttpResponseRedirect(reverse('home'))
+
+class SignUpView(FormView):
+    form_class=forms.UserCreateForm
+    success_url = reverse_lazy('login')
+    template_name = 'profiles/signup.html'
