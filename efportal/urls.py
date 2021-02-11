@@ -38,6 +38,8 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('privacy/', views.PrivacyPage.as_view(), name = 'privacy'),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

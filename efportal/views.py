@@ -44,3 +44,5 @@ class EFAdminPage(TemplateView):
 #     template_name = 'recent_post_list.html'
 #     select_related = ('author',)
 
+class PrivacyPage(TemplateView):
+    template_name = 'privacy.html'
