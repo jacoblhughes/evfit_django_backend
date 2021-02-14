@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 class EFUser(auth.models.User, auth.models.PermissionsMixin):
 
+
     def __str__(self):
         return "@{}".format(self.username)
 

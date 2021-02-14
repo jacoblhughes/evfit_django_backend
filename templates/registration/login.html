@@ -10,7 +10,7 @@
         {% bootstrap_form form %}
         <input type = 'submit' name = '' value ='Login' class = 'btn btn-default'>
     </form>
-    <a href='{% url "profiles:signup" %}'>Sign Up</a>
+    {% comment %} <a href='{% url "profiles:signup" %}'>Sign Up</a> {% endcomment %}
     <br/>
     <a href='{% url "password_reset" %}'>Forgot Password?</a>
 </div>
