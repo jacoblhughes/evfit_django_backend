@@ -15,6 +15,7 @@ class HabitPost(models.Model):
     message = models.TextField()
     message_html = models.TextField(editable=False)
     habit = models.ForeignKey(Habit, related_name="habitposts", on_delete=models.CASCADE)
+    
     # username = models.CharField(max_length=100)
 
     def __str__(self):

@@ -3,7 +3,9 @@ from .. import models
 
 class EFBlogSerializer(serializers.ModelSerializer):
 
+    authorname = serializers.CharField(source='author.username', read_only=True)
+
 
     class Meta:
         model = models.BlogPost
-        fields = ('id','title','content','created_on')
+        fields = ('id','title','content','created_on','authorname')

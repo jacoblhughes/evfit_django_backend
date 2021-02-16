@@ -7,4 +7,4 @@ class EFPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.HabitPost
-        fields = ('user','created_at','message','message_html','habit','username')
+        fields = ('user','created_at','message','message_html','habit','username','id')
