@@ -17,4 +17,4 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Profile
-        fields = ('user','user_key','habit','habit_key')
+        fields = ('user','user_key','habit','habit_key',)

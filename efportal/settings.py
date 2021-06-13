@@ -36,7 +36,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = os.environ['EF_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
 
@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_framework',
     'rest_framework.authtoken',
+    'expo',
+    # 'push_notifications',
 
 ]
 
@@ -280,3 +282,14 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 #     'x-csrftoken',
 #     'x-requested-with',
 # ]
+
+# PUSH_NOTIFICATIONS_SETTINGS = {
+#         "FCM_API_KEY": "[your api key]",
+#         "GCM_API_KEY": "[your api key]",
+#         "APNS_CERTIFICATE": "/path/to/your/certificate.pem",
+#         "APNS_TOPIC": "com.example.push_test",
+#         "WNS_PACKAGE_SECURITY_ID": "[your package security id, e.g: 'ms-app://e-3-4-6234...']",
+#         "WNS_SECRET_KEY": "[your app secret key, e.g.: 'KDiejnLKDUWodsjmewuSZkk']",
+#         "WP_PRIVATE_KEY": "/path/to/your/private.pem",
+#         "WP_CLAIMS": {'sub': "mailto: development@example.com"}
+# }
