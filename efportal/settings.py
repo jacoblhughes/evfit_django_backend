@@ -13,7 +13,9 @@ import django_heroku
 import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+# from django.utils.log import DEFAULT_LOGGING as LOGGING
 
+# LOGGING['handlers']['mail_admins']['include_html'] = True
 sentry_sdk.init(
     dsn="https://e68adab248484e69b024e28d6980b456@sentry.io/5191069",
     integrations=[DjangoIntegration()],
@@ -36,7 +38,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = os.environ['EF_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
 
@@ -178,19 +180,18 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 
 #DataFlair
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-DEFAULT_FROM_EMAIL = 'jacob@evidentfitness.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = 'a'
+DEFAULT_FROM_EMAIL = 'Evident Fitness<jacob@evidentfitness.com>'
 SERVER_EMAIL = 'jacob@evidentfitness.com'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # SECURE_SSL_REDIRECT = True
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -212,31 +213,77 @@ REST_FRAMEWORK = {
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': 'debug.log',
+#         },
+#         'file1': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': 'myLogger.log',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         'myLogger': {
+#             'handlers': ['file1'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+        # Include the default Django email handler for errors
+        # This is what you'd get without configuring logging at all.
+        'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+             # But the emails are plain text by default - HTML is nicer
+            'include_html': True,
         },
-        'file1': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'myLogger.log',
+        # Log to a text file that can be rotated by logrotate
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': 'bigdebug.log'
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
+        # Again, default Django configuration to email unhandled exceptions
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
             'propagate': True,
         },
-        'myLogger': {
-            'handlers': ['file1'],
-            'level': 'DEBUG',
-            'propagate': True,
+        # Might as well log any errors anywhere else in Django
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Your own app - this assumes all your logger names start with "myapp."
+        'myapp': {
+            'handlers': ['logfile'],
+            'level': 'DEBUG', # Or maybe INFO or WARNING
+            'propagate': False
         },
     },
 }

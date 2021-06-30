@@ -2,16 +2,23 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<div class = 'container'>
-    <h1>Login</h1>
-    <br />
-    <form method = 'POST'>
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type = 'submit' name = '' value ='Login' class = 'btn btn-default'>
-    </form>
-    {% comment %} <a href='{% url "profiles:signup" %}'>Sign Up</a> {% endcomment %}
-    <br/>
-    <a href='{% url "password_reset" %}'>Forgot Password?</a>
+<div class='container'>
+    <div>
+        <h1>Login</h1>
+        <br />
+        <form method='POST'>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type='submit' name='' value='Login' class='btn btn-default'>
+        </form>
+        {% comment %} <a href='{% url "profiles:signup" %}'>Sign Up</a> {% endcomment %}
+        <br />
+    </div>
+    {% comment %} <div>
+        <a href='{% url "password_reset" %}'>Forgot Password?</a>
+    </div> {% endcomment %}
+    <div>
+        <a href='{% url "profiles:signup" %}'>Sign Up!</a>
+    </div>
 </div>
 {% endblock %}
