@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .. import models
 
-class ExerciseRecordSerializer(serializers.ModelSerializer):
+class ExerciseInformationSerializer(serializers.ModelSerializer):
 
     class Meta:
 
-        model = models.ExpoRecord
+        model = models.ExerciseInformation
         fields = ('id','exerciseRecord','exercise')

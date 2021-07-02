@@ -11,5 +11,5 @@ class ExerciseRecordViewset(viewsets.ModelViewSet):
         user = self.request.user
         return models.ExerciseRecord.objects.filter(exercise_user = user)
     # queryset = models.HabitMeasurement.objects.all()
-    serializer_class = serializers.ExerciseRecordSerializer
+    serializer_class = serializers.ExerciseInformationSerializer
     # permission_classes = (permissions.IsAuthenticated,)
