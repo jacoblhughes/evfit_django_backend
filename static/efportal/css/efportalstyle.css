@@ -70,6 +70,18 @@ body a:hover {
     color: #1f3252;
 }
 
+.list-exerciselog-div{
+    margin-bottom: 50px;
+    background: white;
+    color: #1f3252;
+}
+
+.list-exerciselog-created-div{
+    padding-bottom: 10px;
+    background: white;
+    color: #1f3252;
+}
+
 .avatar-navbar {
     vertical-align: middle;
     max-width: 4em;

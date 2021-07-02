@@ -1,0 +1,30 @@
+{% extends "exerciselog/exerciselog_base.html" %}
+
+{% block preexerciselog %}
+
+<div class="col-12">
+	<div class="content">
+		<p>See your submitted exercise history below or <a href="{% url 'exerciselog:exercise_add' %}">add a workout session</a>
+	</div>
+
+</div>
+
+{% endblock %}
+
+{% block exerciselog_content %}
+<div class="col-md-12">
+	<div class="list-habit">
+		{% for exercise in object_list %}
+		<div class="list-exerciselog-created-div">
+			{{exercise.created|date:'F d, Y' }}
+		</div>
+		<div class="list-exerciselog-div">
+
+			{{exercise.exercise|linebreaks }}
+
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

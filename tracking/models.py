@@ -134,3 +134,4 @@ class MaxMultipleMeasurement(models.Model):
             self.weight,
             self.created
         )
+

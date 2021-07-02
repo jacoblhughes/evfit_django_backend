@@ -1,0 +1,15 @@
+{% extends "exerciselog/exerciselog_base.html" %}
+{% load bootstrap4 %}
+
+{% block exerciselog_content %}
+<div class = 'col-12'>
+<h4>Record your exercise!</h4>
+</div>
+<div class = 'col-12'>
+  <form method="POST" action="{% url 'exerciselog:exercise_add' %}" id="exerciseForm">
+  	{% csrf_token %}
+  	{% bootstrap_form form %}
+  	<input type="submit" value="Record" class="btn btn-primary btn-large">
+  </form>
+</div>
+{% endblock %}

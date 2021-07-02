@@ -58,6 +58,8 @@
                             href="{% url 'habitposts:create' %}">Post</a></li>
                     <li class='nav-item'><a class="nav-link btn btn-simple"
                             href="{% url 'tracking:tracking' %}">Tracking</a></li>
+                            <li class='nav-item'><a class="nav-link btn btn-simple"
+                            href="{% url 'exerciselog:exercise_list' %}">Exercise Log</a></li>
                     {% else %}
                     <li class='nav-item active'><a class="nav-link btn btn-simple" href="{% url 'login' %}">Log
                             in</a>

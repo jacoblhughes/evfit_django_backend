@@ -39,6 +39,8 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('privacy/', views.PrivacyPage.as_view(), name = 'privacy'),
+    path('exerciselog/', include('exerciselog.urls', namespace ='exerciselog')),
+
 
 
 
