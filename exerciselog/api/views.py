@@ -4,12 +4,14 @@ from . import serializers
 from rest_framework import permissions
 
 
-class ExerciseRecordViewset(viewsets.ModelViewSet):
+class ExerciseInformationViewset(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
-        # return models.ExpoRecord.objects
-        user = self.request.user
-        return models.ExerciseRecord.objects.filter(exercise_user = user)
-    # queryset = models.HabitMeasurement.objects.all()
+        return models.ExerciseInformation.objects.filter(exercise_record=self.request.user.id)
+    # def get_queryset(self, *args, **kwargs):
+    #     user = self.request.user
+    #     return models.ExerciseInformation.objects.all()
+
     serializer_class = serializers.ExerciseInformationSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+
+    permission_classes = (permissions.IsAuthenticated,)

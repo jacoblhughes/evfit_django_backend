@@ -6,4 +6,4 @@ class ExerciseInformationSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = models.ExerciseInformation
-        fields = ('id','exerciseRecord','exercise')
+        fields = ('id','exercise_record','exercise','created')

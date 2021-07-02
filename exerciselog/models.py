@@ -25,7 +25,7 @@ class ExerciseRecord(models.Model):
 
 class ExerciseInformation(models.Model):
 
-    exercise_record = models.ForeignKey(ExerciseRecord, on_delete=models.CASCADE, related_name='exerciseinformation')
+    exercise_record = models.ForeignKey(ExerciseRecord, on_delete=models.CASCADE, related_name='exerciseformation')
     exercise = models.TextField()
     created = models.DateTimeField()
 
