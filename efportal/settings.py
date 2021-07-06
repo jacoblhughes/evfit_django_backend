@@ -38,7 +38,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = os.environ['EF_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ADMINS = [('Jacob','hughes.jacobl@gmail.com')]
 
@@ -181,13 +181,13 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 
 #DataFlair
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = 'a'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD =  os.environ['EF_SENDGRID_PASS']
 DEFAULT_FROM_EMAIL = 'Evident Fitness<jacob@evidentfitness.com>'
 SERVER_EMAIL = 'jacob@evidentfitness.com'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # SECURE_SSL_REDIRECT = True

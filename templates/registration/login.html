@@ -14,11 +14,11 @@
         {% comment %} <a href='{% url "profiles:signup" %}'>Sign Up</a> {% endcomment %}
         <br />
     </div>
-    {% comment %} <div>
-        <a href='{% url "password_reset" %}'>Forgot Password?</a>
-    </div> {% endcomment %}
     <div>
-        <a href='{% url "profiles:signup" %}'>Sign Up!</a>
+        <a href='{% url "password_reset" %}'>Forgot Password?</a>
     </div>
+    {% comment %} <div>
+        <a href='{% url "profiles:signup" %}'>Sign Up!</a>
+    </div> {% endcomment %}
 </div>
 {% endblock %}
