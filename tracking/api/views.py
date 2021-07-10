@@ -7,7 +7,7 @@ from rest_framework import permissions
 class EFHabitMeasViewset(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
-        return models.HabitMeasurement.objects.filter(habit_record=self.request.user.id).order_by('-created')
+        return models.HabitMeasurement.objects.filter(habit_record=self.request.user.id).order_by('-created')[:30]
     # queryset = models.HabitMeasurement.objects.all()
     serializer_class = serializers.EFHabitMeasSerializer
     permission_classes = (permissions.IsAuthenticated,)
