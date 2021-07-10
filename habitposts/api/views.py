@@ -7,6 +7,6 @@ class EFPostViewset(viewsets.ModelViewSet):
     serializer_class = serializers.EFPostSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return models.HabitPost.objects.all().order_by('created_at')
+        return models.HabitPost.objects.all().order_by('created_at')[:30]
 
     permission_classes = (permissions.IsAuthenticated,)
