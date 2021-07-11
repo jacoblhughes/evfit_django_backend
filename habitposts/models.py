@@ -11,7 +11,7 @@ User = get_user_model()
 
 class HabitPost(models.Model):
     user = models.ForeignKey(User, related_name="habituser", on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField()
     message = models.TextField()
     message_html = models.TextField(editable=False)
     habit = models.ForeignKey(Habit, related_name="habitposts", on_delete=models.CASCADE)
