@@ -7,6 +7,7 @@ from habitposts.api.views import EFPostViewset
 from habits.api.views import EFHabitViewset
 from expo.api.views import ExpoRecordViewset
 from exerciselog.api.views import ExerciseInformationViewset
+from workouttemplates.api.views import WorkoutTemplateViewset
 
 router = routers.DefaultRouter()
 router.register(r'profile', ProfileViewset, basename = 'Profile')
@@ -16,3 +17,5 @@ router.register(r'habit_posts', EFPostViewset, basename='HabitPost')
 router.register(r'habits', EFHabitViewset, basename='Habit')
 router.register(r'expo', ExpoRecordViewset, basename='Expo')
 router.register(r'exerciselog', ExerciseInformationViewset, basename='ExerciseLog')
+router.register(r'workouttemplate', WorkoutTemplateViewset, basename='ExerciseLog')
+
