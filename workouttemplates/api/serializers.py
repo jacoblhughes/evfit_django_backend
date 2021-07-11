@@ -6,4 +6,4 @@ class WorkoutTemplateSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = models.WorkoutTemplate
-        fields = ('category','title','tempalate','notes')
+        fields = ('category','title','template','notes')
