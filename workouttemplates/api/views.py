@@ -8,7 +8,7 @@ class WorkoutTemplateViewset(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         # return models.ExpoRecord.objects
-        return models.WorkoutTemplate.objects.all()
+        return models.WorkoutTemplate.objects.all().order_by('category')
     # queryset = models.HabitMeasurement.objects.all()
     serializer_class = serializers.WorkoutTemplateSerializer
     # permission_classes = (permissions.IsAuthenticated,)
