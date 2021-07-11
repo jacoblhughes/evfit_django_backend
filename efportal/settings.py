@@ -172,7 +172,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'thanks'
 
-INTERNAL_IPS = ['127.0.0.1']
+# INTERNAL_IPS = ['127.0.0.1']
 
 #Django-Registration
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
