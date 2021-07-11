@@ -11,4 +11,4 @@ class WorkoutTemplateViewset(viewsets.ModelViewSet):
         return models.WorkoutTemplate.objects.all().order_by('category')
     # queryset = models.HabitMeasurement.objects.all()
     serializer_class = serializers.WorkoutTemplateSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
